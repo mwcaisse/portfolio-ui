@@ -1,72 +1,76 @@
-zz<template>
-  <div class="container">
+<template>
     <div>
-      <logo />
-      <h1 class="title">
-        portfolio-ui
-      </h1>
-      <h2 class="subtitle">
-        portfolio
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+        <nav class="navbar is-dark" role="navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="#">
+                    Mitchell Caisse
+                </a>
+            </div>
+            <div class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item">
+                        About
+                    </a>
+                    <a class="navbar-item">
+                        Experience
+                    </a>
+                    <a class="navbar-item">
+                        Technical Skills
+                    </a>
+                    <a class="navbar-item">
+                        Projects
+                    </a>
+                    <a class="navbar-item">
+                        Contact
+                    </a>
+                    <a class="navbar-item" href="https://codeuntamed.com/">
+                        Blog
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <section class="hero">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title">
+                        Mitchell Caisse
+                    </h1>
+                    <h2 class="subtitle">
+                        Software Engineer
+                    </h2>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container">
+                <h2 class="title">Experience</h2>
+
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">
+                            Insurify
+                        </p>
+                        <p class="card-header-title" style="justify-content: flex-end">
+                            Lead Software Engineer
+                        </p>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                            <p>Designed and implemented infrastructure to improve scalability, reliability, and security of our application. Automated the configuration of servers.</p>
+                            <p>Oversaw the development and architecture of all integrations, handled communication with partners, and defined requirements.</p>
+                            <p>Lead developer of a project to collect payments on our site. Developed a PCI DSS compliant API to process payments. Implemented a scalable and PCI DSS compliant production environment</p>
+                            <p>Enhanced the protection of our customer data by improving encryption practices and utilizing a KMS</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-  </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
 
-export default {
-  components: {
-    Logo
-  }
-}
+    export default {
+
+    }
 </script>
-
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>
