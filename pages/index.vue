@@ -62,6 +62,19 @@
         <section class="section">
             <app-projects :projects="projects" />
         </section>
+
+        <section class="section">
+            <app-contact />
+        </section>
+
+        <footer class="footer is-vcentered">
+            <span>&copy; 2020 Mitchell Caisse</span>
+            <span class="is-pulled-right">
+                <a href="https://github.com/mwcaisse" target="_blank">
+                    <font-awesome-icon :icon="['fab', 'github']" class="fa-2x action-icon" />
+                </a>
+            </span>
+        </footer>
     </div>
 </template>
 
@@ -73,16 +86,30 @@
     import Experience from "~/components/Experience.vue"
     import Skills from "~/components/Skills.vue"
     import Projects from "~/components/Projects.vue"
+    import Contact from "~/components/Contact.vue"
 
     export default {
         components: {
             "app-about": About,
             "app-experience": Experience,
             "app-skills": Skills,
-            "app-projects": Projects
+            "app-projects": Projects,
+            "app-contact": Contact
         },
         data() {
             return data;
         }
     }
 </script>
+
+<style scoped>
+    .action-icon {
+        color: #4a4a4a;
+    }
+
+    .action-icon:hover {
+        color: #3273dc;
+        transform: scale(1.5);
+        cursor: pointer;
+    }
+</style>
