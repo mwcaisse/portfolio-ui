@@ -5,10 +5,8 @@
   "author": "Mitchell Caisse",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
+    "build": "nuxt generate",
+    "start": "nuxt",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore *.config.js .",
     "test": "jest"
   },
