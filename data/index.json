@@ -1,31 +1,31 @@
 {
-    "skill_categories": [
+    "skillCategories": [
         {
             "name": "Languages",
             "skills": [
                 {
                     "title": "C#",
-                    "logo": "csharp.png"
+                    "key": "csharp"
                 },
                 {
                     "title": "Java",
-                    "logo": "java.png"
+                    "key": "java"
                 },
                 {
                     "title": "Python",
-                    "logo": "python.png"
+                    "key": "python"
                 },
                 {
                     "title": "Javascript",
-                    "logo": "javascript.png"
+                    "key": "javascript"
                 },
                 {
                     "title": "C/C++",
-                    "logo": "cpp.png"
+                    "key": "cpp"
                 },
                 {
                     "title": "SQL",
-                    "logo": "sql.jpg"
+                    "key": "sql"
                 }
             ]
         },
@@ -34,19 +34,19 @@
             "skills": [
                 {
                     "title": "Microsoft SQL Server",
-                    "logo": "mssql.jpg"
+                    "key": "mssql"
                 },
                 {
                     "title": "MariaDB/MySQL",
-                    "logo": "mysql.png"
+                    "key": "mysql"
                 },
                 {
                     "title": "Aurora",
-                    "logo": "amazon-aurora.png"
+                    "key": "amazonAurora"
                 },
                 {
                     "title": "Oracle",
-                    "logo": "oracle.png"
+                    "key": "oracle"
                 }
             ]
         },
@@ -55,27 +55,27 @@
             "skills": [
                 {
                     "title": "git",
-                    "logo": "git.png"
+                    "key": "git"
                 },
                 {
                     "title": "TFS",
-                    "logo": "tfs.png"
+                    "key": "tfs"
                 },
                 {
                     "title": "SVN",
-                    "logo": "svn.png"
+                    "key": "svn"
                 },
                 {
                     "title": "Maven",
-                    "logo": "maven.png"
+                    "key": "maven"
                 },
                 {
                     "title": "Jenkins",
-                    "logo": "jenkins.png"
+                    "key": "jenkins"
                 },
                 {
                     "title": "Gradle",
-                    "logo": "gradle.png"
+                    "key": "gradle"
                 }
             ]
         },
@@ -84,46 +84,46 @@
             "skills": [
                 {
                     "title": "Entity Framework",
-                    "logo": "entity-framework.png"
+                    "key": "entityFramework"
                 },
                 {
                     "title": "django",
-                    "logo": "django.png"
+                    "key": "django"
                 },
                 {
                     "title": "django REST framework",
-                    "logo": "drf.png"
+                    "key": "drf"
                 },
                 {
                     "title": "Vue.js",
-                    "logo": "vue.png"
+                    "key": "vue"
                 },
 
                 {
                     "title": "KnockoutJS",
-                    "logo": "knockout.png"
+                    "key": "knockout"
                 },
 
                 {
                     "title": "jQuery",
-                    "logo": "jquery.gif"
+                    "key": "jquery"
                 },
 
                 {
                     "title": "Bootstrap",
-                    "logo": "bootstrap.svg"
+                    "key": "bootstrap"
                 },
                 {
                     "title": "Spring Framework",
-                    "logo": "spring-framework.png"
+                    "key": "springFramework"
                 },
                 {
                     "title": "Apache Solr",
-                    "logo": "apache-solr.png"
+                    "key": "apacheSolr"
                 },
                 {
                     "title": "MyBatis",
-                    "logo": "mybatis.png"
+                    "key": "mybatis"
                 }
             ]
         },
@@ -132,23 +132,23 @@
             "skills": [
                 {
                     "title": "Sharepoint",
-                    "logo": "sharepoint.png"
+                    "key": "sharepoint"
                 },
                 {
                     "title": "SSRS",
-                    "logo": "ssrs.png"
+                    "key": "ssrs"
                 },
                 {
                     "title": "Linux/Unix",
-                    "logo": "linux.png"
+                    "key": "linux"
                 },
                 {
                     "title": "HTML",
-                    "logo": "html.png"
+                    "key": "html"
                 },
                 {
                     "title": "CSS",
-                    "logo": "css.png"
+                    "key": "css"
                 }
             ]
         }
@@ -335,7 +335,7 @@
         {
             "name": "PyDeployer",
             "description": "Automated deloyment and release tool",
-            "thumbnail": "img/project_thumbs/pydeployer.jpg",
+            "thumbnail": "pydeployer.jpg",
             "details": [
                 "Backend written in Python and C#",
                 "Frontend in Javascript and Vue",
@@ -350,7 +350,7 @@
         {
             "name": "CrabZinc",
             "description": "Blogging Platform",
-            "thumbnail": "img/project_thumbs/crabzinc.jpg",
+            "thumbnail": "crabzinc.jpg",
             "details": [
                 "Written in C# and Javascript/Vue",
                 "Blog posts are written and rendered in Markdown"
@@ -362,7 +362,7 @@
         {
             "name": "Car Tracker",
             "description": "Car telematics and location tracking",
-            "thumbnail": "img/project_thumbs/cartracker.jpg",
+            "thumbnail": "cartracker.jpg",
             "details": [
                 "Written in C#, Javascript, Java",
                 "Android application using OBDII and Bluetooth to collect vehicle data"
@@ -375,7 +375,7 @@
         {
             "name": "mwcaisse.com",
             "description": "Personal portfolio website (this site)",
-            "thumbnail": "img/project_thumbs/mwcaisse.jpg",
+            "thumbnail": "mwcaisse.jpg",
             "details": [
                 "Experiment with new technologies and web design"
             ],
@@ -386,7 +386,7 @@
         {
             "name": "Show Reminder",
             "description": "Tracks the air date of my favorite shows",
-            "thumbnail": "img/project_thumbs/showreminder.jpg",
+            "thumbnail": "showreminder.jpg",
             "details": [
                 "Project to learn basics of Angular 2"
             ],

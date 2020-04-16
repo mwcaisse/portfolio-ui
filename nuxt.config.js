@@ -9,7 +9,7 @@ export default {
      ** Headers of the page
      */
     head: {
-        title: process.env.npm_package_name || "",
+        title: "Mitchell Caisse - Software Engineer",
         meta: [
             {
                 charset: "utf-8"
@@ -48,7 +48,11 @@ export default {
     /*
      ** Plugins to load before mounting the App
      */
-    plugins: [],
+    plugins: [
+        {
+            src: "~/plugins/font-awesome"
+        }
+    ],
 
     /*
      ** Nuxt.js dev-modules

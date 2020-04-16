@@ -54,6 +54,14 @@
 
             </div>
         </section>
+
+        <section class="section">
+            <app-skills :skill-categories="skillCategories" />
+        </section>
+
+        <section class="section">
+            <app-projects :projects="projects" />
+        </section>
     </div>
 </template>
 
@@ -63,11 +71,15 @@
 
     import About from "~/components/About.vue"
     import Experience from "~/components/Experience.vue"
+    import Skills from "~/components/Skills.vue"
+    import Projects from "~/components/Projects.vue"
 
     export default {
         components: {
             "app-about": About,
-            "app-experience": Experience
+            "app-experience": Experience,
+            "app-skills": Skills,
+            "app-projects": Projects
         },
         data() {
             return data;
