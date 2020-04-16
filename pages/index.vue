@@ -42,27 +42,16 @@
             </div>
         </section>
         <section class="section">
+            <app-about />
+        </section>
+        <section class="section">
             <div class="container">
                 <h2 class="title">Experience</h2>
 
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                            Insurify
-                        </p>
-                        <p class="card-header-title" style="justify-content: flex-end">
-                            Lead Software Engineer
-                        </p>
-                    </header>
-                    <div class="card-content">
-                        <div class="content">
-                            <p>Designed and implemented infrastructure to improve scalability, reliability, and security of our application. Automated the configuration of servers.</p>
-                            <p>Oversaw the development and architecture of all integrations, handled communication with partners, and defined requirements.</p>
-                            <p>Lead developer of a project to collect payments on our site. Developed a PCI DSS compliant API to process payments. Implemented a scalable and PCI DSS compliant production environment</p>
-                            <p>Enhanced the protection of our customer data by improving encryption practices and utilizing a KMS</p>
-                        </div>
-                    </div>
+                <div v-for="(company, ind) in companies" :key="ind">
+                    <app-experience :company="company" />
                 </div>
+
             </div>
         </section>
     </div>
@@ -70,7 +59,18 @@
 
 <script>
 
-    export default {
+    import data from "~/data/index.json"
 
+    import About from "~/components/About.vue"
+    import Experience from "~/components/Experience.vue"
+
+    export default {
+        components: {
+            "app-about": About,
+            "app-experience": Experience
+        },
+        data() {
+            return data;
+        }
     }
 </script>
