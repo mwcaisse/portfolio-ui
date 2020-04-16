@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav class="navbar is-dark" role="navigation">
+        <nav class="navbar is-dark is-fixed-top" role="navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="#">
                     Mitchell Caisse
@@ -8,19 +8,19 @@
             </div>
             <div class="navbar-menu">
                 <div class="navbar-end">
-                    <a class="navbar-item">
+                    <a class="navbar-item" href="#about">
                         About
                     </a>
-                    <a class="navbar-item">
+                    <a class="navbar-item" href="#experience">
                         Experience
                     </a>
-                    <a class="navbar-item">
+                    <a class="navbar-item" href="#skills">
                         Technical Skills
                     </a>
-                    <a class="navbar-item">
+                    <a class="navbar-item" href="#projects">
                         Projects
                     </a>
-                    <a class="navbar-item">
+                    <a class="navbar-item" href="#contact">
                         Contact
                     </a>
                     <a class="navbar-item" href="https://codeuntamed.com/">
@@ -29,21 +29,15 @@
                 </div>
             </div>
         </nav>
-        <section class="hero">
-            <div class="hero-body">
-                <div class="container">
-                    <h1 class="title">
-                        Mitchell Caisse
-                    </h1>
-                    <h2 class="subtitle">
-                        Software Engineer
-                    </h2>
-                </div>
-            </div>
-        </section>
+
+        <app-name />
+
+        <a id="about" class="anchor"></a>
         <section class="section">
             <app-about />
         </section>
+
+        <a id="experience" class="anchor"></a>
         <section class="section">
             <div class="container">
                 <h2 class="title">Experience</h2>
@@ -55,14 +49,17 @@
             </div>
         </section>
 
+        <a id="skills" class="anchor"></a>
         <section class="section">
             <app-skills :skill-categories="skillCategories" />
         </section>
 
+        <a id="projects" class="anchor"></a>
         <section class="section">
             <app-projects :projects="projects" />
         </section>
 
+        <a id="contact" class="anchor"></a>
         <section class="section">
             <app-contact />
         </section>
@@ -82,6 +79,7 @@
 
     import data from "~/data/index.json"
 
+    import Name from "~/components/Name.vue"
     import About from "~/components/About.vue"
     import Experience from "~/components/Experience.vue"
     import Skills from "~/components/Skills.vue"
@@ -90,6 +88,7 @@
 
     export default {
         components: {
+            "app-name": Name,
             "app-about": About,
             "app-experience": Experience,
             "app-skills": Skills,
