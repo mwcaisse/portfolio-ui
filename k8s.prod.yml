@@ -27,7 +27,7 @@ spec:
         spec:
             containers:
                 - name: portfolio-ui
-                  image: docker.pkg.github.com/mwcaisse/portfolio/portfolio-ui:$IMAGE_TAG
+                  image: registry.gitlab.com/mwcaisse/application-images/portfolio-ui:$IMAGE_TAG
                   ports:
                       - containerPort: 80
             imagePullSecrets:
