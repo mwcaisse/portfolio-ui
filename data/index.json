@@ -5,27 +5,27 @@
             "skills": [
                 {
                     "title": "C#",
-                    "key": "csharp"
+                    "logo": "csharp.png"
                 },
                 {
                     "title": "Java",
-                    "key": "java"
+                    "logo": "java.png"
                 },
                 {
                     "title": "Python",
-                    "key": "python"
+                    "logo": "python.png"
                 },
                 {
                     "title": "Javascript",
-                    "key": "javascript"
+                    "logo": "javascript.png"
                 },
                 {
                     "title": "C/C++",
-                    "key": "cpp"
+                    "logo": "cpp.png"
                 },
                 {
                     "title": "SQL",
-                    "key": "sql"
+                    "logo": "sql.jpg"
                 }
             ]
         },
@@ -34,19 +34,19 @@
             "skills": [
                 {
                     "title": "Microsoft SQL Server",
-                    "key": "mssql"
+                    "logo": "mssql.jpg"
                 },
                 {
                     "title": "MariaDB/MySQL",
-                    "key": "mysql"
+                    "logo": "mysql.png"
                 },
                 {
                     "title": "Aurora",
-                    "key": "amazonAurora"
+                    "logo": "amazon-aurora.png"
                 },
                 {
                     "title": "Oracle",
-                    "key": "oracle"
+                    "logo": "oracle.png"
                 }
             ]
         },
@@ -55,27 +55,27 @@
             "skills": [
                 {
                     "title": "git",
-                    "key": "git"
+                    "logo": "git.png"
                 },
                 {
                     "title": "TFS",
-                    "key": "tfs"
+                    "logo": "tfs.png"
                 },
                 {
                     "title": "SVN",
-                    "key": "svn"
+                    "logo": "svn.png"
                 },
                 {
                     "title": "Maven",
-                    "key": "maven"
+                    "logo": "maven.png"
                 },
                 {
                     "title": "Jenkins",
-                    "key": "jenkins"
+                    "logo": "jenkins.png"
                 },
                 {
                     "title": "Gradle",
-                    "key": "gradle"
+                    "logo": "gradle.png"
                 }
             ]
         },
@@ -84,46 +84,46 @@
             "skills": [
                 {
                     "title": "Entity Framework",
-                    "key": "entityFramework"
+                    "logo": "entity-framework.png"
                 },
                 {
                     "title": "django",
-                    "key": "django"
+                    "logo": "django.png"
                 },
                 {
                     "title": "django REST framework",
-                    "key": "drf"
+                    "logo": "drf.png"
                 },
                 {
                     "title": "Vue.js",
-                    "key": "vue"
+                    "logo": "vue.png"
                 },
 
                 {
                     "title": "KnockoutJS",
-                    "key": "knockout"
+                    "logo": "knockout.png"
                 },
 
                 {
                     "title": "jQuery",
-                    "key": "jquery"
+                    "logo": "jquery.gif"
                 },
 
                 {
                     "title": "Bootstrap",
-                    "key": "bootstrap"
+                    "logo": "bootstrap.svg"
                 },
                 {
                     "title": "Spring Framework",
-                    "key": "springFramework"
+                    "logo": "spring-framework.png"
                 },
                 {
                     "title": "Apache Solr",
-                    "key": "apacheSolr"
+                    "logo": "apache-solr.png"
                 },
                 {
                     "title": "MyBatis",
-                    "key": "mybatis"
+                    "logo": "mybatis.png"
                 }
             ]
         },
@@ -132,23 +132,23 @@
             "skills": [
                 {
                     "title": "Sharepoint",
-                    "key": "sharepoint"
+                    "logo": "sharepoint.png"
                 },
                 {
                     "title": "SSRS",
-                    "key": "ssrs"
+                    "logo": "ssrs.png"
                 },
                 {
                     "title": "Linux/Unix",
-                    "key": "linux"
+                    "logo": "linux.png"
                 },
                 {
                     "title": "HTML",
-                    "key": "html"
+                    "logo": "html.png"
                 },
                 {
                     "title": "CSS",
-                    "key": "css"
+                    "logo": "css.png"
                 }
             ]
         }

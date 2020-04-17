@@ -22,7 +22,7 @@
 <style scoped>
     .name {
         position: relative;
-        background-image: url("/img/background.jpg");
+        background-image: url("~assets/img/background.jpg");
         height: 100vh;
         min-height: 500px;
         max-height: 1080px;

@@ -18,7 +18,10 @@
                         class="column is-one-sixth is-one-fourth-mobile has-text-centered"
                     >
                         <figure>
-                            <app-skill-image :image-key="skill.key" />
+                            <img
+                                class="logo"
+                                :src="require('~/assets/img/skills/' + skill.logo)"
+                            />
                             <figcaption>{{ skill.title }}</figcaption>
                         </figure>
                     </div>
@@ -31,12 +34,8 @@
 
 <script>
 
-    import SkillImage from "~/components/SkillImage.vue"
-
     export default {
-        components: {
-            "app-skill-image": SkillImage
-        },
+
         props: {
             skillCategories: {
                 type: Array,
@@ -96,5 +95,9 @@
         flex: none;
         width: 16.6666%;
         }
+    }
+
+    .logo {
+        width: 64px;
     }
 </style>
