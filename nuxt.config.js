@@ -64,7 +64,8 @@ export default {
      */
     buildModules: [
     //Doc: https://github.com/nuxt-community/eslint-module
-        "@nuxtjs/eslint-module"
+        "@nuxtjs/eslint-module",
+        "@aceforth/nuxt-optimized-images"
     ],
 
     /*
@@ -90,5 +91,12 @@ export default {
         extend (config, ctx) {
 
         }
+    },
+
+    /*
+     ** @aceforth/nuxt-optimized-images configuration
+     */
+    optimizedImages: {
+        optimizeImages: true
     }
 }

@@ -25,7 +25,7 @@
                 },
                 {
                     "title": "SQL",
-                    "logo": "sql.jpg"
+                    "logo": "sql.png"
                 }
             ]
         },
@@ -34,7 +34,7 @@
             "skills": [
                 {
                     "title": "Microsoft SQL Server",
-                    "logo": "mssql.jpg"
+                    "logo": "mssql.png"
                 },
                 {
                     "title": "MariaDB/MySQL",
@@ -106,7 +106,7 @@
 
                 {
                     "title": "jQuery",
-                    "logo": "jquery.gif"
+                    "logo": "jquery.png"
                 },
 
                 {
