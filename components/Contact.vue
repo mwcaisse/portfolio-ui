@@ -93,14 +93,10 @@
         },
         methods: {
             send() {
-                $.ajax({
-                    method: "POST",
-                    url: "/api/message/",
-                    data: JSON.stringify(this.toModel()),
-                    contentType: "application/json",
-                    dataType: "JSON",
-                    jsonp: false
-                });
+                let req = new XMLHttpRequest()
+                req.open("POST", "/api/message/");
+                req.setRequestHeader("Content-Type", "application/json")
+                req.send(JSON.stringify(this.toModel()));
                 this.clear();
             },
             clear() {
