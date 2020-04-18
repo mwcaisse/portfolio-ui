@@ -33,6 +33,7 @@
                             <font-awesome-icon
                                 :icon="['fab', 'github']"
                                 class="fa-2x"
+                                alt="project's github"
                             />
                         </a>
                     </div>

@@ -10,6 +10,9 @@ export default {
      ** Headers of the page
      */
     head: {
+        htmlAttrs: {
+            lang: "en"
+        },
         title: "Mitchell Caisse - Software Engineer",
         meta: [
             {

@@ -12,47 +12,47 @@
                 <div class="field">
                     <label class="label">
                         Name
+                        <div class="control has-icons-left">
+                            <input
+                                v-model="name"
+                                class="input"
+                                type="text"
+                                placeholder="Enter your name"
+                            >
+                            <span class="icon is-small is-left">
+                                <font-awesome-icon :icon="['fas', 'user']" />
+                            </span>
+                        </div>
                     </label>
-                    <div class="control has-icons-left">
-                        <input
-                            v-model="name"
-                            class="input"
-                            type="text"
-                            placeholder="Enter your name"
-                        >
-                        <span class="icon is-small is-left">
-                            <font-awesome-icon :icon="['fas', 'user']" />
-                        </span>
-                    </div>
                 </div>
 
                 <div class="field">
                     <label class="label">
                         Email
+                        <div class="control has-icons-left">
+                            <input
+                                v-model="email"
+                                class="input"
+                                type="text"
+                                placeholder="Enter your email"
+                            >
+                            <span class="icon is-small is-left">
+                                <font-awesome-icon :icon="['fas', 'envelope']" />
+                            </span>
+                        </div>
                     </label>
-                    <div class="control has-icons-left">
-                        <input
-                            v-model="email"
-                            class="input"
-                            type="text"
-                            placeholder="Enter your email"
-                        >
-                        <span class="icon is-small is-left">
-                            <font-awesome-icon :icon="['fas', 'envelope']" />
-                        </span>
-                    </div>
                 </div>
 
                 <div class="field">
                     <label class="label">
                         Message
+                        <div class="control">
+                            <textarea
+                                v-model="message"
+                                class="textarea"
+                            />
+                        </div>
                     </label>
-                    <div class="control">
-                        <textarea
-                            v-model="message"
-                            class="textarea"
-                        />
-                    </div>
                 </div>
 
                 <div class="field is-grouped">
