@@ -95,6 +95,7 @@ export default {
      ** @aceforth/nuxt-optimized-images configuration
      */
     optimizedImages: {
-        optimizeImages: true
+        optimizeImages: true,
+        inlineImageLimit: -1 // inlining webp images isn't working, its rendering as [object module] instead of a url
     }
 }

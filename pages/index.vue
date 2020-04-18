@@ -68,7 +68,11 @@
         <footer class="footer is-vcentered">
             <span>&copy; 2020 Mitchell Caisse</span>
             <span class="is-pulled-right">
-                <a href="https://github.com/mwcaisse" target="_blank">
+                <a
+                    href="https://github.com/mwcaisse"
+                    target="_blank"
+                    rel="noopener"
+                >
                     <font-awesome-icon :icon="['fab', 'github']" class="fa-2x action-icon" />
                 </a>
             </span>

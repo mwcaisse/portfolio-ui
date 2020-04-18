@@ -25,7 +25,7 @@
                             <picture>
                                 <source :srcSet="require('~/assets/img/skills/' + skill.logo + '?webp')" type="image/webp">
                                 <source :srcSet="require('~/assets/img/skills/' + skill.logo)" type="image/png">
-                                <img :src="require('~/assets/img/skills/' + skill.logo)">
+                                <img :src="require('~/assets/img/skills/' + skill.logo)" alt="">
                             </picture>
                             <figcaption>{{ skill.title }}</figcaption>
                         </figure>
