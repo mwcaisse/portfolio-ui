@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 const path = require("path")
+const multiLoader = require("multi-loader")
 
 export default {
     mode: "universal",
@@ -62,7 +63,7 @@ export default {
     buildModules: [
     //Doc: https://github.com/nuxt-community/eslint-module
         "@nuxtjs/eslint-module",
-        //"@aceforth/nuxt-optimized-images"
+        "@aceforth/nuxt-optimized-images"
     ],
 
     /*

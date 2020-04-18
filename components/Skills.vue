@@ -18,10 +18,11 @@
                         class="column is-one-sixth is-one-fourth-mobile has-text-centered"
                     >
                         <figure>
-                            <img
-                                class="logo"
-                                :src="require('~/assets/img/skills/' + skill.logo)"
-                            />
+                            <picture>
+                                <source :srcSet="require('~/assets/img/skills/' + skill.logo + '?webp')" type="image/webp" />
+                                <source :srcSet="require('~/assets/img/skills/' + skill.logo)" type="image/png" />
+                                <img :src="require('~/assets/img/skills/' + skill.logo)" />
+                            </picture>
                             <figcaption>{{ skill.title }}</figcaption>
                         </figure>
                     </div>
@@ -45,6 +46,7 @@
         data() {
             return { };
         }
+
     }
 
 </script>

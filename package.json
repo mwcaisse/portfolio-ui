@@ -34,10 +34,13 @@
     "imagemin-mozjpeg": "^8.0.0",
     "imagemin-pngquant": "^8.0.0",
     "imagemin-svgo": "^7.1.0",
+    "imagemin-webp": "^5.1.0",
     "jest": "^24.1.0",
     "json-loader": "^0.5.7",
+    "multi-loader": "^0.1.0",
     "node-sass": "^4.13.1",
     "sass-loader": "^8.0.2",
-    "vue-jest": "^4.0.0-0"
+    "vue-jest": "^4.0.0-0",
+    "webp-loader": "^0.6.0"
   }
 }
