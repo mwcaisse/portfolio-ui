@@ -1,6 +1,8 @@
 <template>
     <div class="container">
-        <h3 class="title">About Me</h3>
+        <h3 class="title">
+            About Me
+        </h3>
         <p>
             I am a motivated software developer with a passion for automating tasks and creating robust and easy to use APIs.
             I can enjoy creating intuitive user interfaces, if forced upon me.

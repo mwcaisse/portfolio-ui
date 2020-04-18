@@ -1,6 +1,8 @@
 <template>
     <div class="container">
-        <h3 class="title">Skills</h3>
+        <h3 class="title">
+            Skills
+        </h3>
 
         <div
             v-for="(category, ind) in skillCategories"
@@ -8,7 +10,9 @@
             class="card"
         >
             <div class="card-header">
-                <p class="card-header-title">{{ category.name }}</p>
+                <p class="card-header-title">
+                    {{ category.name }}
+                </p>
             </div>
             <div class="card-content">
                 <div class="columns is-vcentered is-centered is-multiline">
@@ -19,16 +23,15 @@
                     >
                         <figure>
                             <picture>
-                                <source :srcSet="require('~/assets/img/skills/' + skill.logo + '?webp')" type="image/webp" />
-                                <source :srcSet="require('~/assets/img/skills/' + skill.logo)" type="image/png" />
-                                <img :src="require('~/assets/img/skills/' + skill.logo)" />
+                                <source :srcSet="require('~/assets/img/skills/' + skill.logo + '?webp')" type="image/webp">
+                                <source :srcSet="require('~/assets/img/skills/' + skill.logo)" type="image/png">
+                                <img :src="require('~/assets/img/skills/' + skill.logo)">
                             </picture>
                             <figcaption>{{ skill.title }}</figcaption>
                         </figure>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </template>

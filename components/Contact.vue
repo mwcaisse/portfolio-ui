@@ -1,5 +1,4 @@
 <template>
-
     <div class="container">
         <h3 class="title">
             Contact
@@ -20,7 +19,7 @@
                             class="input"
                             type="text"
                             placeholder="Enter your name"
-                        />
+                        >
                         <span class="icon is-small is-left">
                             <font-awesome-icon :icon="['fas', 'user']" />
                         </span>
@@ -37,7 +36,7 @@
                             class="input"
                             type="text"
                             placeholder="Enter your email"
-                        />
+                        >
                         <span class="icon is-small is-left">
                             <font-awesome-icon :icon="['fas', 'envelope']" />
                         </span>

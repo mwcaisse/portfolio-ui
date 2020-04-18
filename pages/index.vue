@@ -32,34 +32,35 @@
 
         <app-name />
 
-        <a id="about" class="anchor"></a>
+        <a id="about" class="anchor" />
         <section class="section">
             <app-about />
         </section>
 
-        <a id="experience" class="anchor"></a>
+        <a id="experience" class="anchor" />
         <section class="section">
             <div class="container">
-                <h2 class="title">Experience</h2>
+                <h2 class="title">
+                    Experience
+                </h2>
 
                 <div v-for="(company, ind) in companies" :key="ind">
                     <app-experience :company="company" />
                 </div>
-
             </div>
         </section>
 
-        <a id="skills" class="anchor"></a>
+        <a id="skills" class="anchor" />
         <section class="section">
             <app-skills :skill-categories="skillCategories" />
         </section>
 
-        <a id="projects" class="anchor"></a>
+        <a id="projects" class="anchor" />
         <section class="section">
             <app-projects :projects="projects" />
         </section>
 
-        <a id="contact" class="anchor"></a>
+        <a id="contact" class="anchor" />
         <section class="section">
             <app-contact />
         </section>

@@ -266,6 +266,11 @@ rules:
         - error
         - 4
         - baseIndent: 1
+    "vue/max-attributes-per-line":
+        - error
+        - singleline: 2
+          multiline:
+            max: 1
     wrap-iife: error
     wrap-regex: error
     yield-star-spacing: error
