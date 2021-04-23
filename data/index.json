@@ -156,7 +156,7 @@
     "companies": [
         {
             "name": "Kessel Run",
-            "title": "Application Architect",
+            "title": "Portfolio Tech Lead",
             "dates": [
                 {
                     "start": "September 2019",
@@ -165,12 +165,12 @@
             ],
             "points": [
                 "Oversaw the development of a suite of applications for F-35 maintenance across 10 product teams and ~80 developers.",
+                "Devised and executed plan to transition suite of applications to sustainment, reduce technical debt, improve standardization, and improve documentation to increase future maintainability.",
                 "Architected an event based solution to support disconnected, disadvantaged, and distributed operations across a suite of 10 microservices and guided teams towards implementation.",
                 "Provided technical guidance to developers and input to teams road maps to meet technical and product goals.",
                 "Led effort to develop, document, and implement architectural improvements across a suite of applications and development teams.",
                 "Quickly became a subject matter expert in our architecture and engineering practices, serving as a resource/mentor for other developers.",
-                "Technical leader on a product team, mentoring junior developers and influencing design to be maintainable and follow best practices.",
-                "Maintained and contributed to repository of documentation on development related tasks and best practices."
+                "Technical leader on a product team, mentoring junior developers and influencing design to be maintainable and follow best practices. Following XP practices such as test driven development and pair programming."
             ],
             "skills": [
                 "Java",

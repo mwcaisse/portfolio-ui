@@ -271,6 +271,7 @@ rules:
         - singleline: 2
           multiline:
             max: 1
+    "vue/require-v-for-key": "off"
     wrap-iife: error
     wrap-regex: error
     yield-star-spacing: error
