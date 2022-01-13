@@ -272,6 +272,7 @@ rules:
           multiline:
             max: 1
     "vue/require-v-for-key": "off"
+    "vue/multi-word-component-names": off
     wrap-iife: error
     wrap-regex: error
     yield-star-spacing: error

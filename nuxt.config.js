@@ -4,7 +4,7 @@ const path = require("path")
 const multiLoader = require("multi-loader")
 
 export default {
-    mode: "universal",
+    target: "static",
 
     /*
      ** Headers of the page
@@ -66,7 +66,7 @@ export default {
     buildModules: [
     //Doc: https://github.com/nuxt-community/eslint-module
         "@nuxtjs/eslint-module",
-        "@aceforth/nuxt-optimized-images"
+        "@nuxt/image",
     ],
 
     /*
@@ -93,12 +93,7 @@ export default {
 
         }
     },
+    image: {
 
-    /*
-     ** @aceforth/nuxt-optimized-images configuration
-     */
-    optimizedImages: {
-        optimizeImages: true,
-        inlineImageLimit: -1 // inlining webp images isn't working, its rendering as [object module] instead of a url
     }
 }
