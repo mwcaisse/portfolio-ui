@@ -4,7 +4,7 @@ name: production
 
 steps:
     - name: lint
-      image: node
+      image: node:lts
       commands:
           - yarn install
           - yarn lint

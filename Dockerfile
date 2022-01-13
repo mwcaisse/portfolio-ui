@@ -1,4 +1,4 @@
-FROM node as build
+FROM node:lts as build
 
 WORKDIR /build/src
 
