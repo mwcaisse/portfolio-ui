@@ -33,7 +33,7 @@ steps:
           server:
               from_secret: k8s-server
           token:
-              from_secret: k8s-token
+              from_secret: k8s-token-prod
           ca:
               from_secret: k8s-ca
           tv_image_tag: '${DRONE_COMMIT}'
@@ -79,10 +79,10 @@ get:
 
 ---
 kind: secret
-name: k8s-token
+name: k8s-token-prod
 get:
     path: drone/mwcaisse-k8s
-    name: dev-access-token
+    name: production-access-token
 
 ---
 kind: secret
