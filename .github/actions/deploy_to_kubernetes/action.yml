@@ -37,9 +37,9 @@ runs:
     - name: Deploy to K8s
       shell: bash
       run: |
-        kubectl --certificate-authority="/tmp/k8s_ca" --server=${{ inputs.kubernetes_server }} --token=${{ inputs.kubernetes_token }} --namespace=${{ inputs.namespace }} apply -f ${{ inputs.deployment_file }} --request-timeout='${{ input.kubernetes_request_timeout }}'
+        kubectl --certificate-authority="/tmp/k8s_ca" --server=${{ inputs.kubernetes_server }} --token=${{ inputs.kubernetes_token }} --namespace=${{ inputs.namespace }} apply -f ${{ inputs.deployment_file }} --request-timeout='${{ inputs.kubernetes_request_timeout }}'
 
     - name: Verify Deployment
       shell: bash
       run: |
-        kubectl --certificate-authority="/tmp/k8s_ca" --server=${{ inputs.kubernetes_server }} --token=${{ inputs.kubernetes_token }} --namespace=${{ inputs.namespace }} rollout status deployment/${{ inputs.deployment_name }} --request-timeout='${{ input.kubernetes_request_timeout }}'
+        kubectl --certificate-authority="/tmp/k8s_ca" --server=${{ inputs.kubernetes_server }} --token=${{ inputs.kubernetes_token }} --namespace=${{ inputs.namespace }} rollout status deployment/${{ inputs.deployment_name }} --request-timeout='${{ inputs.kubernetes_request_timeout }}'
