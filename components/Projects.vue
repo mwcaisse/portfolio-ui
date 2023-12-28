@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image">
-                            <img :src="require('~/assets/img/projects/' + project.thumbnail)" alt="">
+                            <NuxtImg :src="'/img/projects/' + project.thumbnail" />
                         </figure>
                     </div>
                     <div class="card-content">

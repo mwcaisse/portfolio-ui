@@ -3,7 +3,7 @@
 const path = require("path")
 const multiLoader = require("multi-loader")
 
-export default {
+export default defineNuxtConfig({
     target: "static",
 
     /*
@@ -61,18 +61,12 @@ export default {
     ],
 
     /*
-     ** Nuxt.js dev-modules
+     ** Nuxt.js modules
      */
-    buildModules: [
-    //Doc: https://github.com/nuxt-community/eslint-module
+    modules: [
         "@nuxtjs/eslint-module",
         "@nuxt/image",
     ],
-
-    /*
-     ** Nuxt.js modules
-     */
-    modules: [],
 
     /*
      ** Build configuration
@@ -96,4 +90,4 @@ export default {
     image: {
 
     }
-}
+});

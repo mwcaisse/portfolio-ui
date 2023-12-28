@@ -6,7 +6,7 @@
             <h2>Software Engineer</h2>
             <a
                 class="button"
-                href="/res/resume.pdf"
+                href="/resume.pdf"
                 target="_blank"
             >
                 Download Resume
@@ -22,7 +22,7 @@
 <style scoped>
     .name {
         position: relative;
-        background-image: url("~assets/img/background.jpg");
+        background-image: url("/img/background.jpg");
         height: 100vh;
         min-height: 500px;
         max-height: 1080px;

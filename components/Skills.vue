@@ -23,9 +23,7 @@
                     >
                         <figure>
                             <picture>
-                                <source :srcSet="require('~/assets/img/skills/' + skill.logo + '?webp')" type="image/webp">
-                                <source :srcSet="require('~/assets/img/skills/' + skill.logo)" type="image/png">
-                                <img :src="require('~/assets/img/skills/' + skill.logo)" alt="">
+                                <NuxtImg :src="'/img/skills/' + skill.logo" />
                             </picture>
                             <figcaption>{{ skill.title }}</figcaption>
                         </figure>
