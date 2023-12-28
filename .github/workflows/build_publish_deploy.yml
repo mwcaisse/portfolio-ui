@@ -35,7 +35,7 @@ jobs:
           push: true
           tags: |
             registry.gitlab.com/mwcaisse/application-images/portfolio-ui:latest
-            registry.gitlab.com/mwcaisse/application-images/portfolio-ui:${{ GITHUB_SHA }}
+            registry.gitlab.com/mwcaisse/application-images/portfolio-ui:${{ github.sha }}
 #  deploy:
 #    runs-on: ubuntu-latest
 #    steps:
