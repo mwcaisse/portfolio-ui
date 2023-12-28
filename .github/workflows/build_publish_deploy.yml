@@ -5,6 +5,7 @@ on:
       - master
 jobs:
   lint:
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,6 +15,7 @@ jobs:
       - run: yarn install
       - run: yarn lint
   build_publish:
+    name: Build and Publish image
     runs-on: ubuntu-latest
     steps:
       - name: Checkout master
@@ -36,8 +38,24 @@ jobs:
           tags: |
             registry.gitlab.com/mwcaisse/application-images/portfolio-ui:latest
             registry.gitlab.com/mwcaisse/application-images/portfolio-ui:${{ github.sha }}
-#  deploy:
-#    runs-on: ubuntu-latest
-#    steps:
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build_publish
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
 
+      - name: Add the SHA to K8s template
+        run: |
+          sed -i 's/[[image_tag]]/${{ github.sha }}/g` k8s.prod.yml
+
+      - name: Deploy to K8s
+        run: |          
+          echo "${{ secrets.KUBERNETES_CA }} >> /tmp/k8s_ca
+          kubectl --certificate-authority="/tmp/k8s_ca" --server=${{ vars.KUBERNETES_SERVER }} --token=${{ secrets.KUBERNETES_TOKEN_PROD }} --namespace=production apply -f k8s.prod.yml
+
+      - name: Verify Deployment
+        run: |
+          echo "${{ secrets.KUBERNETES_CA }} >> /tmp/k8s_ca
+          kubectl --certificate-authority="/tmp/k8s_ca" --server=${{ vars.KUBERNETES_SERVER }} --token=${{ secrets.KUBERNETES_TOKEN_PROD }} --namespace=production rollout status deployment/portfolio-ui
 
