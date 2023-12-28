@@ -49,7 +49,10 @@ export default defineNuxtConfig({
     /*
      ** Global CSS
      */
-    css: ["bulma"],
+    css: [
+        "bulma",
+        '@fortawesome/fontawesome-svg-core/styles.css'
+    ],
 
     /*
      ** Plugins to load before mounting the App
