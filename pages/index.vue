@@ -66,7 +66,7 @@
         </section>
 
         <footer class="footer is-vcentered">
-            <span>&copy; 2022 Mitchell Caisse</span>
+            <span>&copy; 2023 Mitchell Caisse</span>
             <span class="is-pulled-right">
                 <a
                     href="https://github.com/mwcaisse"
