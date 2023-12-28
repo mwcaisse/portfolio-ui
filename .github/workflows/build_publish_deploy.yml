@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - master
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   lint:
     name: Lint
@@ -57,5 +60,5 @@ jobs:
       - name: Verify Deployment
         run: |
           echo "${{ secrets.KUBERNETES_CA }}" >> /tmp/k8s_ca
-          kubectl --certificate-authority="/tmp/k8s_ca" --server=${{ vars.KUBERNETES_SERVER }} --token=${{ secrets.KUBERNETES_TOKEN_PROD }} --namespace=production rollout status deployment/portfolio-ui
+          kubectl --certificate-authority="/tmp/k8s_ca" --server=${{ vars.KUBERNETES_SERVER }} --token=${{ secrets.KUBERNETES_TOKEN_PROD }} --namespace=production rollout status deployment/portfolio-ui --request-timeout='300s'
 
