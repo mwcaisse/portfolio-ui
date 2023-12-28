@@ -56,6 +56,6 @@ jobs:
 
       - name: Verify Deployment
         run: |
-          echo "${{ secrets.KUBERNETES_CA }} >> /tmp/k8s_ca
+          echo "${{ secrets.KUBERNETES_CA }}" >> /tmp/k8s_ca
           kubectl --certificate-authority="/tmp/k8s_ca" --server=${{ vars.KUBERNETES_SERVER }} --token=${{ secrets.KUBERNETES_TOKEN_PROD }} --namespace=production rollout status deployment/portfolio-ui
 
