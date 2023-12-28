@@ -47,7 +47,7 @@ jobs:
 
       - name: Add the SHA to K8s template
         run: |
-          sed -i 's/[[image_tag]]/${{ github.sha }}/g' k8s.prod.yml
+          sed -i 's/\[\[image_tag\]\]/${{ github.sha }}/g' k8s.prod.yml
 
       - name: Deploy to K8s
         run: |          
