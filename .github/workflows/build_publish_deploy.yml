@@ -52,13 +52,12 @@ jobs:
         run: |
           sed -i 's/\[\[image_tag\]\]/${{ github.sha }}/g' k8s.prod.yml
 
-      - name: Deploy to K8s
-        run: |          
-          echo "${{ secrets.KUBERNETES_CA }}" >> /tmp/k8s_ca
-          kubectl --certificate-authority="/tmp/k8s_ca" --server=${{ vars.KUBERNETES_SERVER }} --token=${{ secrets.KUBERNETES_TOKEN_PROD }} --namespace=production apply -f k8s.prod.yml
-
-      - name: Verify Deployment
-        run: |
-          echo "${{ secrets.KUBERNETES_CA }}" >> /tmp/k8s_ca
-          kubectl --certificate-authority="/tmp/k8s_ca" --server=${{ vars.KUBERNETES_SERVER }} --token=${{ secrets.KUBERNETES_TOKEN_PROD }} --namespace=production rollout status deployment/portfolio-ui --request-timeout='300s'
-
+      - name: Deploy to Kubernetes
+        uses: .github/actions/deploy_to_kubernetes
+        with:
+          deployment_file: k8s.prod.yml
+          deployment_name: portfolio-ui
+          namespace: production
+          kubernetes_server: ${{ vars.KUBERNETES_SERVER }}
+          kubernetes_ca: ${{ secrets.KUBERNETES_CA }}
+          kubernetes_token: ${{ secrets.KUBERNETES_TOKEN_PROD }}

@@ -1,0 +1,45 @@
+name: Deploy to Kubernetes
+description: Deploys an image to kubernetes
+inputs:
+  deployment_file:
+    description: The name of the kubernetes deployment file to apply
+    required: true
+    default: k8s.dev.yml
+  deployment_name:
+    description: The name of the deployment to verify / deploy
+    required: true
+  namespace:
+    description: The kubernetes namespace
+    required: true
+    default: dev
+  kubernetes_server:
+    description: The host of the kubernetes server
+    required: true
+  kubernetes_ca:
+    description: The CA file for the kubernetes server
+    required: true
+  kubernetes_token:
+    description: The token to use to deploy to kubernetes
+    required: true
+  kubernetes_request_timeout:
+    description: The timeout to pass to kubernetes when issuing the deploy / verification commands
+    required: false
+    default: "300s"
+
+runs:
+  using: composite
+  steps:
+    - name: Create k8s CA file
+      shell: bash
+      run: |
+        echo "${{ inputs.kubernetes_ca }}" >> /tmp/k8s_ca
+
+    - name: Deploy to K8s
+      shell: bash
+      run: |
+        kubectl --certificate-authority="/tmp/k8s_ca" --server=${{ inputs.kubernetes_server }} --token=${{ inputs.kubernetes_token }} --namespace=${{ inputs.namespace }} apply -f ${{ inputs.deployment_file }} --request-timeout='${{ input.kubernetes_request_timeout }}'
+
+    - name: Verify Deployment
+      shell: bash
+      run: |
+        kubectl --certificate-authority="/tmp/k8s_ca" --server=${{ inputs.kubernetes_server }} --token=${{ inputs.kubernetes_token }} --namespace=${{ inputs.namespace }} rollout status deployment/${{ inputs.deployment_name }} --request-timeout='${{ input.kubernetes_request_timeout }}'
