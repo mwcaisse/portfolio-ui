@@ -47,7 +47,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Add the SHA to K8s template
-        uses: mwcaisse/gha-common/actions/replace_placeholder_in_template
+        uses: mwcaisse/gha-common/actions/replace_placeholder_in_template@master
         with:
           template_file: k8s.prod.yml
           token: image_tag
