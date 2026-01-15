@@ -9,9 +9,13 @@
     "astro": "astro"
   },
   "engines": {
-    "node": "24.x"
+    "node": ">=24.x"
   },
   "dependencies": {
     "astro": "5.16.9"
+  },
+  "resolutions": {
+    "//": "font kitten 1.0.1 needs node 25, so pin it to 1.0.0 which doesn't",
+    "fontkitten": "1.0.0"
   }
 }
