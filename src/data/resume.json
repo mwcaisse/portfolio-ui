@@ -1,0 +1,203 @@
+{
+    "name": "Mitchell Caisse",
+    "title": "Software Engineer",
+    "tagline": "distributed systems · web apps · dev tools",
+    "about": "Software engineer with 10+ years building web applications, distributed systems, and the tools that support them. Currently a Principal Software Engineer at Dark Wolf Solutions.",
+    "links": {
+        "blog": "https://codeuntamed.com/",
+        "github": "https://github.com/mwcaisse/",
+        "resume": "/resume.pdf",
+        "pgp": "/mwcaisse.gpg",
+        "email": "mitchell@mwcaisse.com"
+    },
+    "companies": [
+        {
+            "name": "Dark Wolf Solutions",
+            "title": "Principal Software Engineer",
+            "dates": [
+                { "start": "July 2024", "end": "Present" }
+            ],
+            "points": [
+                "Led development of an application to manage inventory of products in theater. Implemented a method to synchronize data across a distributed system with limited or no connectivity.",
+                "Developed an application to ingest text / media files, process them via AI/ML pipelines, and make the results easily searchable.",
+                "Coordinated amongst disparate teams to define requirements for integration and data migration. Advised on architectural updates to improve reliability of data transfer between systems.",
+                "Developed a tool to migrate data from a legacy application to a new application, supporting migration of specific subsets of data."
+            ],
+            "skills": []
+        },
+        {
+            "name": "Tonic AI",
+            "title": "Software Engineering Manager",
+            "dates": [
+                { "start": "September 2022", "end": "July 2024" }
+            ],
+            "points": [
+                "Launched a greenfield project to quickly orchestrate databases, pre-populated with data, in Kubernetes. Demo'ed to customers and achieved 2 paying customers within 2 months.",
+                "Led development of solution to database container artifacts, populated with de-identified data, that could be spun up in testing pipelines without a dedicated database."
+            ],
+            "skills": []
+        },
+        {
+            "name": "Tonic AI",
+            "title": "Senior Software Engineer",
+            "dates": [
+                { "start": "November 2021", "end": "September 2022" }
+            ],
+            "points": [
+                "Lead developer supporting our Spark offering and customers. Added support for new versions of Spark, and spark technologies (Databricks, Apache Livy). Improved performance by 50%.",
+                "Architected and developed a solution to merge data from multiple databases together (Upsert) with support across multiple databases (Oracle, MySQL, Postgres, SQL Server)."
+            ],
+            "skills": []
+        },
+        {
+            "name": "Kessel Run",
+            "title": "Portfolio Tech Lead",
+            "dates": [
+                { "start": "August 2020", "end": "November 2021" }
+            ],
+            "points": [
+                "Oversaw the development of a suite of applications for F-35 maintenance across 10 product teams and 80 developers.",
+                "Architected and helped implement an event based solution to support DDIL across 10 services.",
+                "Provided technical guidance to developers and roadmaps to meet technical and product goals."
+            ],
+            "skills": []
+        },
+        {
+            "name": "Kessel Run",
+            "title": "Senior Software Engineer",
+            "dates": [
+                { "start": "September 2019", "end": "August 2020" }
+            ],
+            "points": [
+                "Quickly became a subject matter expert in our architecture and engineering practices, serving as a resource and mentor for other developers.",
+                "Technical leader on a product team, mentored junior developers and influenced design to be maintainable and follow best practices. Utilized XP, test driven development, and pair programming."
+            ],
+            "skills": []
+        },
+        {
+            "name": "Insurify",
+            "title": "Lead Software Developer",
+            "dates": [
+                { "start": "December 2017", "end": "September 2019" }
+            ],
+            "points": [
+                "Led the back-end development team, oversaw the development and architecture of all integrations, handled communication with partners, and defined requirements.",
+                "Lead developer of a project to collect payments on our site. Developed a PCI DSS compliant API to process payments. Implemented a scalable and PCI DSS compliant production environment."
+            ],
+            "skills": []
+        },
+        {
+            "name": "Raytheon Company",
+            "title": "Software Developer",
+            "dates": [
+                { "start": "May 2015", "end": "December 2017" }
+            ],
+            "points": [
+                "Lead developer on several applications, including part pricing, workplace compliance, and import / export compliance. Played a key role in defining requirements and designing implementation."
+            ],
+            "skills": []
+        }
+    ],
+    "skillCategories": [
+        {
+            "name": "Languages",
+            "skills": [
+                { "title": "C#" },
+                { "title": "Python" },
+                { "title": "Java" },
+                { "title": "Kotlin" },
+                { "title": "JavaScript" },
+                { "title": "TypeScript" },
+                { "title": "SQL" }
+            ]
+        },
+        {
+            "name": "Technologies",
+            "skills": [
+                { "title": "Spring" },
+                { "title": ".NET" },
+                { "title": "FastAPI" },
+                { "title": "Django REST Framework" },
+                { "title": "React" },
+                { "title": "Vue" },
+                { "title": "Docker" },
+                { "title": "Kubernetes" },
+                { "title": "Terraform" },
+                { "title": "Git" },
+                { "title": "AWS" },
+                { "title": "Postgres" },
+                { "title": "MySQL" },
+                { "title": "Bash" },
+                { "title": "Linux" }
+            ]
+        }
+    ],
+    "education": [
+        {
+            "name": "Worcester Polytechnic Institute",
+            "title": "B.S. in Computer Science",
+            "dates": [
+                { "start": "May 2015", "end": "May 2015" }
+            ]
+        }
+    ],
+    "projects": [
+        {
+            "name": "PyDeployer",
+            "description": "Automated deployment and release tool",
+            "details": [
+                "Backend written in Python and C#",
+                "Frontend in Javascript and Vue",
+                "Easily build, package, and deploy software across different servers/environments",
+                "This site was deployed using it"
+            ],
+            "github": [
+                "https://github.com/mwcaisse/pydeployer",
+                "https://github.com/mwcaisse/pydeployer-web"
+            ]
+        },
+        {
+            "name": "CrabZinc",
+            "description": "Blogging platform",
+            "details": [
+                "Written in C# and Javascript/Vue",
+                "Blog posts are written and rendered in Markdown"
+            ],
+            "github": [
+                "https://github.com/mwcaisse/crab-zinc"
+            ]
+        },
+        {
+            "name": "Car Tracker",
+            "description": "Car telematics and location tracking",
+            "details": [
+                "Written in C#, Javascript, Java",
+                "Android application using OBDII and Bluetooth to collect vehicle data"
+            ],
+            "github": [
+                "https://github.com/mwcaisse/car-tracker-server",
+                "https://github.com/mwcaisse/car-tracker-android"
+            ]
+        },
+        {
+            "name": "mwcaisse.com",
+            "description": "Personal portfolio website (this site)",
+            "details": [
+                "Experiment with new technologies and web design"
+            ],
+            "github": [
+                "https://github.com/mwcaisse/portfolio"
+            ]
+        },
+        {
+            "name": "Show Reminder",
+            "description": "Tracks the air date of my favorite shows",
+            "details": [
+                "Project to learn basics of Angular 2"
+            ],
+            "github": [
+                "https://github.com/mwcaisse/ShowReminder"
+            ]
+        }
+    ]
+}
