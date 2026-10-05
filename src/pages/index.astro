@@ -1,78 +1,793 @@
 ---
+import resume from "../data/resume.json";
 
+const companies = resume.companies;
+const skillCategories = resume.skillCategories;
+const projects = resume.projects;
+const links = resume.links;
 ---
 
-<style>
-	.main {
-		position: fixed;
-		padding: 0;
+<style is:global>
+	:root {
+		/* breeze dark window chrome */
+		--win-bg: #232629;
+		--titlebar: #2a2e33;
+		--win-border: #3b4249;
+		--btn-hover: #3f4750;
+		--title-text: #b6c2cc;
+	/* zellij tab strip */
+	--tabstrip-bg: #14181c;
+	--tab-inactive-bg: #8a8a8a;
+	--tab-inactive-text: #262626;
+	--tab-hover-bg: #b8b8b8;
+	--tab-active-bg: #afff00;
+	--tab-active-text: #141a02;
+		/* alacritty default palette */
+		--term-bg: #1d2021;
+		--text: #d8d8d8;
+		--dim: #7f858b;
+		--accent: #04b572;
+		--warn: #e7d66b;
+		--link: #0087d7;
+		--err: #f22f47;
+		--row-hover: #262b2e;
+		--row-active: #2e3539;
+		--tag-bg: #262b2e;
+		--panel-border: #2e3338;
+		--term-pad-x: 1.75rem;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	html,
+	body {
 		margin: 0;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
+		padding: 0;
+	}
 
+	body {
+		background: #111315;
+		background-image: radial-gradient(ellipse 80% 60% at 50% -10%, #1b1f23 0%, #111315 70%);
+		color: var(--text);
+		font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+		font-size: 15px;
+		line-height: 1.55;
+		min-height: 100vh;
+	}
+
+	a {
+		color: var(--link);
+		text-decoration: none;
+	}
+
+	a:hover,
+	a:focus-visible {
+		text-decoration: underline;
+	}
+
+	.wrap {
+		max-width: 1000px;
+		margin: 0 auto;
+		padding: 3rem 1rem 4rem;
+	}
+
+	/* ---- plasma window frame ---- */
+	.window {
+		background: var(--win-bg);
+		border: 1px solid var(--win-border);
+		border-radius: 8px;
+		box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
 		overflow: hidden;
-		background-image: url(/img/background.webp);
-		background-size: cover;
-		background-position: center;
 	}
 
-	.main .content {
+	.titlebar {
 		display: flex;
-		padding-top: 20vh;
-		flex-direction: row;
-		justify-content: center;
-	}
-
-	.content-background {
-		background-color: rgba(255, 255, 255, 0.6);
-		padding-top: 0.5rem;
-		padding-bottom: 0.5rem;
-		padding-left: 1.5rem;
-		padding-right: 1.5rem;
-		border-radius: 1rem;
-	}
-
-	.name {
-		font-size: 5em;
-		font-weight: 900;
-	}
-
-	.stack {
-		display: flex;
-
-		flex-direction: column;
 		align-items: center;
 		gap: 0.5rem;
+		background: var(--titlebar);
+		padding: 0 0.4rem 0 0.8rem;
+		height: 38px;
+		border-bottom: 1px solid var(--win-border);
+		user-select: none;
 	}
 
-	.link {
-		font-size: 1.25rem;
+	.titlebar-icon {
+		display: grid;
+		place-items: center;
+		width: 20px;
+		height: 20px;
+		border-radius: 4px;
+		background: var(--row-active);
+		color: var(--accent);
+		font-size: 0.8rem;
+		flex: none;
 	}
 
+	.titlebar-title {
+		flex: 1;
+		text-align: center;
+		color: var(--title-text);
+		font-size: 0.85rem;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.window-buttons {
+		display: flex;
+		gap: 2px;
+		flex: none;
+	}
+
+	.window-buttons button {
+		display: grid;
+		place-items: center;
+		width: 28px;
+		height: 28px;
+		border-radius: 6px;
+		border: 0;
+		background: transparent;
+		color: var(--title-text);
+		font: inherit;
+		font-size: 0.85rem;
+		line-height: 1;
+		cursor: pointer;
+		padding: 0;
+	}
+
+	.window-buttons button:hover,
+	.window-buttons button:focus-visible {
+		background: var(--btn-hover);
+		text-decoration: none;
+	}
+
+	.window-buttons svg {
+		display: block;
+		stroke: currentColor;
+		fill: none;
+		stroke-width: 1.5;
+		stroke-linecap: round;
+	}
+
+	/* ---- zellij tab strip (powerline segments) ---- */
+	.tabstrip {
+		display: flex;
+		align-items: stretch;
+		gap: 4px;
+		background: var(--tabstrip-bg);
+		padding: 4px 8px 0;
+		overflow-x: auto;
+		white-space: nowrap;
+		scrollbar-width: none;
+		border-bottom: 1px solid var(--panel-border);
+	}
+
+	.tabstrip::-webkit-scrollbar {
+		display: none;
+	}
+
+	.tab {
+		position: relative;
+		display: flex;
+		align-items: center;
+		border: 0;
+		background: var(--tab-inactive-bg);
+		color: var(--tab-inactive-text);
+		font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+		font-size: 0.8rem;
+		font-weight: 800;
+		padding: 1px 14px 1px 16px;
+		cursor: pointer;
+		/* powerline segment: chevron notch on the left, arrow tip on the right */
+		clip-path: polygon(
+			0 0,
+			calc(100% - 8px) 0,
+			100% 50%,
+			calc(100% - 8px) 100%,
+			0 100%,
+			8px 50%
+		);
+	}
+
+	.tab:hover {
+		background: var(--tab-hover-bg);
+	}
+
+	.tab:focus-visible {
+		filter: drop-shadow(0 0 2px var(--tab-active-bg));
+	}
+
+	.tab.active {
+		background: var(--tab-active-bg);
+		color: var(--tab-active-text);
+	}
+
+	.tab.active:hover {
+		background: var(--tab-active-bg);
+	}
+
+	/* ---- terminal body ---- */
+	.term-body {
+		background: var(--term-bg);
+		padding: 1.5rem var(--term-pad-x) 1.25rem;
+		min-height: 420px;
+	}
+
+	.dim {
+		color: var(--dim);
+	}
+
+	/* boot sequence */
+	.boot {
+		margin-bottom: 1.25rem;
+		margin-left: calc(-1 * var(--term-pad-x));
+	}
+
+	.cursor {
+		display: inline-block;
+		width: 0.6em;
+		height: 1.15em;
+		background: var(--accent);
+		vertical-align: text-bottom;
+		animation: blink 1.06s steps(1) infinite;
+	}
+
+	@keyframes blink {
+		50% { opacity: 0; }
+	}
+
+	/* views */
+	[data-view] {
+		display: none;
+	}
+
+	[data-view].active {
+		display: block;
+		animation: fadein 140ms ease-out;
+	}
+
+	@keyframes fadein {
+		from { opacity: 0; transform: translateY(3px); }
+		to { opacity: 1; transform: none; }
+	}
+
+	/* section file views */
+	.file-header {
+		margin-bottom: 1.25rem;
+		margin-left: calc(-1 * var(--term-pad-x));
+	}
+
+	/* powerline prompt prefix (shared by boot, file headers, bottom bar) */
+	.prompt {
+		display: inline-flex;
+		align-items: center;
+		margin-right: 0.55em;
+		vertical-align: middle;
+	}
+
+	.section-title {
+		font-size: 1.6rem;
+		font-weight: 700;
+		margin: 0 0 0.35rem;
+	}
+
+	.section-sub {
+		color: var(--dim);
+		margin: 0 0 1.5rem;
+	}
+
+	/* experience */
+	.entry {
+		border: 1px solid var(--panel-border);
+		border-radius: 8px;
+		padding: 1rem 1.25rem;
+		margin-bottom: 1rem;
+	}
+
+	.entry-head {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 0.25rem 1rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.entry-name {
+		font-weight: 700;
+		font-size: 1.05rem;
+	}
+
+	.entry-name .sep {
+		color: var(--dim);
+		font-weight: 400;
+	}
+
+	.entry-dates {
+		color: var(--dim);
+		font-size: 0.85rem;
+	}
+
+	.entry ul {
+		margin: 0.5rem 0 0;
+		padding-left: 1.1rem;
+	}
+
+	.entry li {
+		margin-bottom: 0.4rem;
+	}
+
+	.entry li::marker {
+		color: var(--accent);
+	}
+
+	/* skills */
+	.skill-group {
+		margin-bottom: 1.5rem;
+	}
+
+	.skill-group h3 {
+		margin: 0 0 0.6rem;
+		font-size: 0.9rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--dim);
+	}
+
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.45rem;
+	}
+
+	.tag {
+		background: var(--tag-bg);
+		border: 1px solid var(--panel-border);
+		border-radius: 999px;
+		padding: 0.15rem 0.8rem;
+		font-size: 0.9rem;
+	}
+
+	/* projects */
+	.project {
+		border: 1px solid var(--panel-border);
+		border-radius: 8px;
+		padding: 1rem 1.25rem;
+		margin-bottom: 1rem;
+	}
+
+	.project-name {
+		font-weight: 700;
+	}
+
+	.project-desc {
+		color: var(--dim);
+		margin: 0.1rem 0 0.5rem;
+	}
+
+	.project ul {
+		margin: 0 0 0.5rem;
+		padding-left: 1.1rem;
+	}
+
+	.project li::marker {
+		color: var(--accent);
+	}
+
+	.project .gh {
+		font-size: 0.85rem;
+		color: var(--dim);
+	}
+
+	/* about / contact */
+	.about-p {
+		max-width: 60ch;
+		margin-bottom: 1.25rem;
+	}
+
+	.contact-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.contact-list li {
+		display: flex;
+		gap: 1rem;
+		padding: 0.4rem 0;
+		border-bottom: 1px dashed var(--panel-border);
+	}
+
+	.contact-list li:last-child {
+		border-bottom: 0;
+	}
+
+	.contact-list .k {
+		color: var(--dim);
+		min-width: 9ch;
+	}
+
+	/* bottom prompt */
+	.bottombar {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		gap: 1rem;
+		background: var(--term-bg);
+		padding: 0.25rem 0 0.5rem;
+		font-size: 0.85rem;
+	}
+
+	/* bobthefish powerline prompt */
+	.omf-seg {
+		display: inline-flex;
+		align-items: center;
+		padding: 1px 14px 1px 12px;
+		margin-left: -8px;
+		clip-path: polygon(
+			0 0,
+			calc(100% - 8px) 0,
+			100% 50%,
+			calc(100% - 8px) 100%,
+			0 100%,
+			8px 50%
+		);
+	}
+
+	.omf-seg:first-child {
+		margin-left: 0;
+		clip-path: polygon(
+			0 0,
+			calc(100% - 8px) 0,
+			100% 50%,
+			calc(100% - 8px) 100%,
+			0 100%
+		);
+	}
+
+	.omf-user {
+		color: #cccccc;
+		font-weight: 700;
+		background: #255e87;
+	}
+
+	.omf-at {
+		color: #cccccc;
+	}
+
+	.omf-host {
+		color: #cccccc;
+	}
+
+	.omf-path {
+		color: #333333;
+		font-weight: 700;
+		background: #ffffff;
+	}
+
+	@media (max-width: 600px) {
+		:root {
+			--term-pad-x: 1rem;
+		}
+
+		.wrap {
+			padding: 1rem 0.5rem 2rem;
+		}
+
+		.term-body {
+			padding: 1.1rem var(--term-pad-x) 1rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.cursor {
+			animation: none;
+		}
+
+		[data-view].active {
+			animation: none;
+		}
+	}
 </style>
+
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@800&display=swap"
+			rel="stylesheet"
+		/>
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content="Mitchell Caisse — software engineer. Experience, projects, skills, and contact." />
 		<title>Mitchell Caisse</title>
 	</head>
 	<body>
-		<div class="main">
-			<div class="content">
-				<div class="content-background stack">
-					<span class="name">Mitchell Caisse</span>
-					<span class="link"><a href="/resume.pdf" target="_blank">Resume</a></span>
-					<span class="link"><a href="https://codeuntamed.com/" target="_blank">Blog</a></span>
-					<span class="link"><a href="https://github.com/mwcaisse/" target="_blank">Github</a></span>
-					<span class="link"><a href="/mwcaisse.gpg" download>PGP</a></span>
+		<div class="wrap">
+			<div class="window" role="application" aria-label="Terminal window">
+				<div class="titlebar">
+					<span class="titlebar-icon" aria-hidden="true">❯_</span>
+					<span class="titlebar-title">mitchell@mwcaisse: ~ — alacritty</span>
+					<div class="window-buttons" aria-hidden="true">
+						<button type="button" tabindex="-1">
+							<svg width="16" height="16" viewBox="0 0 16 16">
+								<polyline points="3,6 8,11 13,6" />
+							</svg>
+						</button>
+						<button type="button" tabindex="-1">
+							<svg width="16" height="16" viewBox="0 0 16 16">
+								<polyline points="3,10 8,5 13,10" />
+							</svg>
+						</button>
+						<button type="button" tabindex="-1">
+							<svg width="16" height="16" viewBox="0 0 16 16">
+								<line x1="4" y1="4" x2="12" y2="12" />
+								<line x1="12" y1="4" x2="4" y2="12" />
+							</svg>
+						</button>
+					</div>
 				</div>
 
-			</div>
+				<nav class="tabstrip" aria-label="Sections">
+					<button class="tab" data-goto="about">about.md</button>
+					<button class="tab" data-goto="experience">experience.log</button>
+					<button class="tab" data-goto="skills">skills.yaml</button>
+					<button class="tab" data-goto="projects">projects/</button>
+					<button class="tab" data-goto="contact">contact.sh</button>
+				</nav>
 
+				<div class="term-body">
+					<div class="boot" id="boot" aria-hidden="true"></div>
+
+					<!-- about -->
+					<section data-view="about">
+						<div class="file-header"><span class="prompt"></span>cat about.md</div>
+						<h1 class="section-title">{resume.name}</h1>
+						<p class="section-sub">{resume.title} · {resume.tagline}</p>
+						<p class="about-p">{resume.about}</p>
+						<p class="dim">education: {resume.education[0].title}, {resume.education[0].name} ({resume.education[0].dates[0].start})</p>
+						<ul class="contact-list">
+							<li><span class="k">blog</span><a href={links.blog} target="_blank" rel="noopener">codeuntamed.com</a></li>
+							<li><span class="k">github</span><a href={links.github} target="_blank" rel="noopener">github.com/mwcaisse</a></li>
+							<li><span class="k">resume</span><a href={links.resume} target="_blank">resume.pdf</a></li>
+							<li><span class="k">pgp</span><a href={links.pgp} download>mwcaisse.gpg</a></li>
+						</ul>
+					</section>
+
+					<!-- experience -->
+					<section data-view="experience">
+						<div class="file-header"><span class="prompt"></span>cat experience.log</div>
+						<h1 class="section-title">Experience</h1>
+						<p class="section-sub">{companies.length} positions, 2015 → present</p>
+						{
+							companies.map((c) => (
+								<div class="entry">
+									<div class="entry-head">
+										<span class="entry-name">
+											{c.name} <span class="sep">— {c.title}</span>
+										</span>
+										<span class="entry-dates">
+											{c.dates.map((d) => `${d.start} – ${d.end}`).join(", ")}
+										</span>
+									</div>
+									<ul>
+										{c.points.map((p) => <li>{p}</li>)}
+									</ul>
+								</div>
+							))
+						}
+					</section>
+
+					<!-- skills -->
+					<section data-view="skills">
+						<div class="file-header"><span class="prompt"></span>cat skills.yaml</div>
+						<h1 class="section-title">Skills</h1>
+						<p class="section-sub">things i reach for</p>
+						{
+							skillCategories.map((cat) => (
+								<div class="skill-group">
+									<h3>{cat.name}</h3>
+									<div class="tags">
+										{cat.skills.map((s) => <span class="tag">{s.title}</span>)}
+									</div>
+								</div>
+							))
+						}
+					</section>
+
+					<!-- projects -->
+					<section data-view="projects">
+						<div class="file-header"><span class="prompt"></span>ls -la projects/</div>
+						<h1 class="section-title">Projects</h1>
+						<p class="section-sub">side projects & experiments</p>
+						{
+							projects.map((p) => (
+								<div class="project">
+									<div class="project-name">{p.name}</div>
+									<p class="project-desc">{p.description}</p>
+									<ul>
+										{p.details.map((d) => <li>{d}</li>)}
+									</ul>
+									<div class="gh">
+										{p.github.map((g) => (
+											<a href={g} target="_blank" rel="noopener">{new URL(g).pathname.slice(1)}</a>
+										)).join(" · ")}
+									</div>
+								</div>
+							))
+						}
+					</section>
+
+					<!-- contact -->
+					<section data-view="contact">
+						<div class="file-header"><span class="prompt"></span>./contact.sh --info</div>
+						<h1 class="section-title">Contact</h1>
+						<p class="section-sub">the fastest way to reach me</p>
+						<ul class="contact-list">
+							<li><span class="k">github</span><a href={links.github} target="_blank" rel="noopener">github.com/mwcaisse</a></li>
+							<li><span class="k">blog</span><a href={links.blog} target="_blank" rel="noopener">codeuntamed.com</a></li>
+							<li><span class="k">pgp</span><a href={links.pgp} download>mwcaisse.gpg</a></li>
+							<li><span class="k">resume</span><a href={links.resume} target="_blank">resume.pdf</a></li>
+						</ul>
+					</section>
+				</div>
+
+				<div class="bottombar">
+					<span class="prompt"><span class="omf-seg omf-user"><span>mitchell</span><span class="omf-at">@</span><span class="omf-host">mwcaisse</span></span><span class="omf-seg omf-path">~</span></span><span class="cursor" aria-hidden="true"></span>
+				</div>
+			</div>
 		</div>
+
+		<noscript>
+			<style>
+				.boot, .tabstrip, .back, .file-header {
+					display: none !important;
+				}
+
+				[data-view] {
+					display: block !important;
+					margin-bottom: 2rem;
+				}
+			</style>
+		</noscript>
 	</body>
 </html>
+
+<script>
+	const views = Array.from(document.querySelectorAll("[data-view]"));
+	const tabs = Array.from(document.querySelectorAll(".tab"));
+	const bootEl = document.getElementById("boot");
+	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+	const PROMPT_HTML =
+		'<span class="omf-seg omf-user"><span>mitchell</span><span class="omf-at">@</span><span class="omf-host">mwcaisse</span></span><span class="omf-seg omf-path">~</span>';
+
+	document.querySelectorAll(".file-header .prompt").forEach((p) => {
+		p.innerHTML = PROMPT_HTML;
+	});
+
+	const KEY_TO_VIEW = {
+		"1": "about",
+		"2": "experience",
+		"3": "skills",
+		"4": "projects",
+		"5": "contact",
+	};
+
+	const FIRST_VIEW = "about";
+
+	let current = FIRST_VIEW;
+
+	function show(name) {
+		current = name;
+		views.forEach((v) => v.classList.toggle("active", v.dataset.view === name));
+		tabs.forEach((t) => t.classList.toggle("active", t.dataset.goto === name));
+		window.scrollTo({ top: 0 });
+	}
+
+	function open(name) {
+		show(name);
+	}
+
+	// tab strip
+	tabs.forEach((tab) => tab.addEventListener("click", () => open(tab.dataset.goto)));
+
+	// keyboard: works from any view
+	document.addEventListener("keydown", (e) => {
+		if (!bootDone) finishBoot();
+		if (KEY_TO_VIEW[e.key]) {
+			e.preventDefault();
+			open(KEY_TO_VIEW[e.key]);
+			return;
+		}
+		if (e.key === "Escape" || e.key === "Home" || e.key === "0") {
+			e.preventDefault();
+			show(FIRST_VIEW);
+		}
+	});
+
+	// boot typing effect
+	const bootLines = [
+		{ cmd: true, text: "whoami" },
+		{ cmd: false, text: "mitchell caisse — software engineer" },
+		{ cmd: true, text: "ls" },
+		{ cmd: false, text: "about.md  experience.log  skills.yaml  projects/  contact.sh" },
+	];
+
+	let bootDone = false;
+	let bootTimers = [];
+
+	function finishBoot() {
+		bootTimers.forEach(clearTimeout);
+		bootTimers = [];
+		bootDone = true;
+		bootEl.innerHTML = bootLines
+			.map((l) =>
+				l.cmd
+					? `<div class="cmd-line"><span class="prompt">${PROMPT_HTML}</span>${l.text}</div>`
+					: `<div class="out">${l.text}</div>`
+			)
+			.join("");
+	}
+
+	function typeBoot() {
+		bootEl.innerHTML = "";
+		const cursorEl = document.createElement("span");
+		cursorEl.className = "cursor";
+		bootEl.appendChild(cursorEl);
+
+		let li = 0;
+		let ci = 0;
+		let el = null;
+
+		function step() {
+			if (li >= bootLines.length) {
+				finishBoot();
+				return;
+			}
+			const line = bootLines[li];
+			if (ci === 0) {
+				el = document.createElement("div");
+				el.className = line.cmd ? "cmd-line" : "out";
+				if (line.cmd) {
+					const p = document.createElement("span");
+					p.className = "prompt";
+					p.innerHTML = PROMPT_HTML;
+					el.appendChild(p);
+				}
+				const t = document.createElement("span");
+				t.className = "typed";
+				el.appendChild(t);
+				bootEl.insertBefore(el, cursorEl);
+			}
+			ci += 1;
+			el.querySelector(".typed").textContent = line.text.slice(0, ci);
+			if (ci >= line.text.length) {
+				li += 1;
+				ci = 0;
+				bootTimers.push(setTimeout(step, line.cmd ? 220 : 120));
+			} else {
+				bootTimers.push(setTimeout(step, 14));
+			}
+		}
+
+		step();
+	}
+
+	if (reducedMotion) {
+		finishBoot();
+	} else {
+		typeBoot();
+	}
+
+	document.addEventListener("click", () => {
+		if (!bootDone) finishBoot();
+	});
+
+	show(FIRST_VIEW);
+</script>
