@@ -34,6 +34,7 @@ const links = resume.links;
 		--row-active: #2e3539;
 		--tag-bg: #262b2e;
 		--panel-border: #2e3338;
+		--term-pad-x: 1.75rem;
 	}
 
 	* {
@@ -210,7 +211,7 @@ const links = resume.links;
 	/* ---- terminal body ---- */
 	.term-body {
 		background: var(--term-bg);
-		padding: 1.5rem 1.75rem 1.25rem;
+		padding: 1.5rem var(--term-pad-x) 1.25rem;
 		min-height: 420px;
 	}
 
@@ -221,16 +222,7 @@ const links = resume.links;
 	/* boot sequence */
 	.boot {
 		margin-bottom: 1.25rem;
-	}
-
-	.boot .cmd-line .prompt::after {
-		content: "$";
-		margin-right: 0.55em;
-	}
-
-	.prompt {
-		color: var(--accent);
-		font-weight: 700;
+		margin-left: calc(-1 * var(--term-pad-x));
 	}
 
 	.cursor {
@@ -264,11 +256,15 @@ const links = resume.links;
 	/* section file views */
 	.file-header {
 		margin-bottom: 1.25rem;
+		margin-left: calc(-1 * var(--term-pad-x));
 	}
 
-	.file-header .prompt::after {
-		content: "$";
+	/* powerline prompt prefix (shared by boot, file headers, bottom bar) */
+	.prompt {
+		display: inline-flex;
+		align-items: center;
 		margin-right: 0.55em;
+		vertical-align: middle;
 	}
 
 	.section-title {
@@ -420,23 +416,11 @@ const links = resume.links;
 		align-items: center;
 		gap: 1rem;
 		background: var(--term-bg);
-		padding: 0.25rem 1.75rem 0.5rem;
+		padding: 0.25rem 0 0.5rem;
 		font-size: 0.85rem;
 	}
 
 	/* bobthefish powerline prompt */
-	.omf {
-		display: flex;
-		flex-direction: column;
-		line-height: 1.35;
-		font-size: 0.82rem;
-	}
-
-	.omf-row {
-		display: flex;
-		align-items: stretch;
-	}
-
 	.omf-seg {
 		display: inline-flex;
 		align-items: center;
@@ -483,19 +467,17 @@ const links = resume.links;
 		background: #ffffff;
 	}
 
-	.omf-prompt {
-		display: inline-flex;
-		align-items: center;
-		padding-left: 0.9em;
-	}
-
 	@media (max-width: 600px) {
+		:root {
+			--term-pad-x: 1rem;
+		}
+
 		.wrap {
 			padding: 1rem 0.5rem 2rem;
 		}
 
 		.term-body {
-			padding: 1.1rem 1rem 1rem;
+			padding: 1.1rem var(--term-pad-x) 1rem;
 		}
 	}
 
@@ -564,7 +546,7 @@ const links = resume.links;
 
 					<!-- about -->
 					<section data-view="about">
-						<div class="file-header"><span class="prompt">cat about.md</span></div>
+						<div class="file-header"><span class="prompt"></span>cat about.md</div>
 						<h1 class="section-title">{resume.name}</h1>
 						<p class="section-sub">{resume.title} · {resume.tagline}</p>
 						<p class="about-p">{resume.about}</p>
@@ -579,7 +561,7 @@ const links = resume.links;
 
 					<!-- experience -->
 					<section data-view="experience">
-						<div class="file-header"><span class="prompt">cat experience.log</span></div>
+						<div class="file-header"><span class="prompt"></span>cat experience.log</div>
 						<h1 class="section-title">Experience</h1>
 						<p class="section-sub">{companies.length} positions, 2015 → present</p>
 						{
@@ -603,7 +585,7 @@ const links = resume.links;
 
 					<!-- skills -->
 					<section data-view="skills">
-						<div class="file-header"><span class="prompt">cat skills.yaml</span></div>
+						<div class="file-header"><span class="prompt"></span>cat skills.yaml</div>
 						<h1 class="section-title">Skills</h1>
 						<p class="section-sub">things i reach for</p>
 						{
@@ -620,7 +602,7 @@ const links = resume.links;
 
 					<!-- projects -->
 					<section data-view="projects">
-						<div class="file-header"><span class="prompt">ls -la projects/</span></div>
+						<div class="file-header"><span class="prompt"></span>ls -la projects/</div>
 						<h1 class="section-title">Projects</h1>
 						<p class="section-sub">side projects & experiments</p>
 						{
@@ -643,7 +625,7 @@ const links = resume.links;
 
 					<!-- contact -->
 					<section data-view="contact">
-						<div class="file-header"><span class="prompt">./contact.sh --info</span></div>
+						<div class="file-header"><span class="prompt"></span>./contact.sh --info</div>
 						<h1 class="section-title">Contact</h1>
 						<p class="section-sub">the fastest way to reach me</p>
 						<ul class="contact-list">
@@ -656,16 +638,7 @@ const links = resume.links;
 				</div>
 
 				<div class="bottombar">
-					<span class="omf">
-						<span class="omf-row">
-							<span class="omf-seg omf-user">
-								<span>mitchell</span><span class="omf-at">@</span><span class="omf-host">mwcaisse</span>
-							</span>
-							<span class="omf-seg omf-path">~</span>
-							<span class="omf-prompt"><span class="cursor" aria-hidden="true"></span></span>
-						</span>
-					</span>
-
+					<span class="prompt"><span class="omf-seg omf-user"><span>mitchell</span><span class="omf-at">@</span><span class="omf-host">mwcaisse</span></span><span class="omf-seg omf-path">~</span></span><span class="cursor" aria-hidden="true"></span>
 				</div>
 			</div>
 		</div>
@@ -690,6 +663,13 @@ const links = resume.links;
 	const tabs = Array.from(document.querySelectorAll(".tab"));
 	const bootEl = document.getElementById("boot");
 	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+	const PROMPT_HTML =
+		'<span class="omf-seg omf-user"><span>mitchell</span><span class="omf-at">@</span><span class="omf-host">mwcaisse</span></span><span class="omf-seg omf-path">~</span>';
+
+	document.querySelectorAll(".file-header .prompt").forEach((p) => {
+		p.innerHTML = PROMPT_HTML;
+	});
 
 	const KEY_TO_VIEW = {
 		"1": "about",
@@ -749,7 +729,7 @@ const links = resume.links;
 		bootEl.innerHTML = bootLines
 			.map((l) =>
 				l.cmd
-					? `<div class="cmd-line"><span class="prompt"></span>${l.text}</div>`
+					? `<div class="cmd-line"><span class="prompt">${PROMPT_HTML}</span>${l.text}</div>`
 					: `<div class="out">${l.text}</div>`
 			)
 			.join("");
@@ -777,6 +757,7 @@ const links = resume.links;
 				if (line.cmd) {
 					const p = document.createElement("span");
 					p.className = "prompt";
+					p.innerHTML = PROMPT_HTML;
 					el.appendChild(p);
 				}
 				const t = document.createElement("span");
