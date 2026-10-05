@@ -140,6 +140,14 @@ const links = resume.links;
 		text-decoration: none;
 	}
 
+	.window-buttons svg {
+		display: block;
+		stroke: currentColor;
+		fill: none;
+		stroke-width: 1.5;
+		stroke-linecap: round;
+	}
+
 	/* ---- zellij tab strip ---- */
 	.tabstrip {
 		display: flex;
@@ -459,8 +467,44 @@ const links = resume.links;
 		gap: 1rem;
 		background: var(--tabstrip-bg);
 		border-top: 1px solid var(--panel-border);
-		padding: 0.5rem 1.25rem;
+		padding: 0.4rem 1.25rem 0.55rem;
 		font-size: 0.85rem;
+	}
+
+	/* oh-my-fish style prompt (parrot-ish) */
+	.omf {
+		display: flex;
+		flex-direction: column;
+		line-height: 1.25;
+	}
+
+	.omf-user {
+		color: var(--accent);
+		font-weight: 700;
+	}
+
+	.omf-at {
+		color: var(--dim);
+	}
+
+	.omf-host {
+		color: var(--link);
+		font-weight: 700;
+	}
+
+	.omf-in {
+		color: var(--dim);
+		font-style: italic;
+	}
+
+	.omf-path {
+		color: var(--link);
+		font-weight: 700;
+	}
+
+	.omf-fish {
+		color: #43aecd;
+		margin-right: 0.4em;
 	}
 
 	.bottombar .hint {
@@ -526,9 +570,22 @@ const links = resume.links;
 					<span class="titlebar-icon" aria-hidden="true">❯_</span>
 					<span class="titlebar-title">mitchell@mwcaisse: ~ — alacritty</span>
 					<div class="window-buttons" aria-hidden="true">
-						<button type="button" tabindex="-1">–</button>
-						<button type="button" tabindex="-1">□</button>
-						<button type="button" tabindex="-1">×</button>
+						<button type="button" tabindex="-1">
+							<svg width="16" height="16" viewBox="0 0 16 16">
+								<line x1="3" y1="12" x2="13" y2="12" />
+							</svg>
+						</button>
+						<button type="button" tabindex="-1">
+							<svg width="16" height="16" viewBox="0 0 16 16">
+								<rect x="3.75" y="3.75" width="8.5" height="8.5" rx="1.5" />
+							</svg>
+						</button>
+						<button type="button" tabindex="-1">
+							<svg width="16" height="16" viewBox="0 0 16 16">
+								<line x1="4" y1="4" x2="12" y2="12" />
+								<line x1="12" y1="4" x2="4" y2="12" />
+							</svg>
+						</button>
 					</div>
 				</div>
 
@@ -671,9 +728,13 @@ const links = resume.links;
 				</div>
 
 				<div class="bottombar">
-					<span>
-						<span class="prompt" id="cwd">mitchell@mwcaisse:~$</span>
-						<span class="cursor" aria-hidden="true"></span>
+					<span class="omf">
+						<span>
+							<span class="omf-user">mitchell</span><span class="omf-at">@</span><span class="omf-host">mwcaisse</span>
+							<span class="omf-in">in</span>
+							<span class="omf-path">~</span>
+						</span>
+						<span><span class="omf-fish" aria-hidden="true">🐚</span><span class="cursor" aria-hidden="true"></span></span>
 					</span>
 					<span class="hint">
 						<kbd>1-5</kbd> open file · <kbd>0</kbd>/<kbd>esc</kbd> home
@@ -702,17 +763,7 @@ const links = resume.links;
 	const tabs = Array.from(document.querySelectorAll(".tab"));
 	const menuItems = Array.from(document.querySelectorAll(".menu-item"));
 	const bootEl = document.getElementById("boot");
-	const cwdEl = document.getElementById("cwd");
 	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-	const NAMES = {
-		home: "~",
-		about: "~/about.md",
-		experience: "~/experience.log",
-		skills: "~/skills.yaml",
-		projects: "~/projects",
-		contact: "~/contact.sh",
-	};
 
 	const KEY_TO_VIEW = {
 		"1": "about",
@@ -729,7 +780,6 @@ const links = resume.links;
 		current = name;
 		views.forEach((v) => v.classList.toggle("active", v.dataset.view === name));
 		tabs.forEach((t) => t.classList.toggle("active", t.dataset.goto === name));
-		cwdEl.textContent = `mitchell@mwcaisse:${NAMES[name] ?? "~"}$`;
 		if (name === "home") {
 			setCursor(0);
 		}
