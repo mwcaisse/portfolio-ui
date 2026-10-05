@@ -9,17 +9,29 @@ const links = resume.links;
 
 <style is:global>
 	:root {
-		--bg: #0b0f14;
-		--term-bg: #10161d;
-		--term-border: #263140;
-		--titlebar: #1a222d;
-		--text: #c9d4e0;
-		--dim: #6d7d8f;
-		--accent: #56d66b;
-		--link: #58a6ff;
-		--row-hover: #1a2330;
-		--row-active: #203044;
-		--tag-bg: #1a2330;
+		/* breeze dark window chrome */
+		--win-bg: #232629;
+		--titlebar: #2a2e33;
+		--win-border: #3b4249;
+		--btn-hover: #3f4750;
+		--title-text: #b6c2cc;
+		/* zellij tab strip */
+		--tabstrip-bg: #14181c;
+		--tab-dim: #78879a;
+		--tab-active-bg: #3daee9;
+		--tab-active-text: #08131a;
+		/* alacritty default palette */
+		--term-bg: #1d2021;
+		--text: #d8d8d8;
+		--dim: #7f858b;
+		--accent: #04b572;
+		--warn: #e7d66b;
+		--link: #0087d7;
+		--err: #f22f47;
+		--row-hover: #262b2e;
+		--row-active: #2e3539;
+		--tag-bg: #262b2e;
+		--panel-border: #2e3338;
 	}
 
 	* {
@@ -33,8 +45,8 @@ const links = resume.links;
 	}
 
 	body {
-		background: var(--bg);
-		background-image: radial-gradient(ellipse 80% 50% at 50% -10%, #16202c 0%, var(--bg) 70%);
+		background: #111315;
+		background-image: radial-gradient(ellipse 80% 60% at 50% -10%, #1b1f23 0%, #111315 70%);
 		color: var(--text);
 		font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 		font-size: 15px;
@@ -53,16 +65,17 @@ const links = resume.links;
 	}
 
 	.wrap {
-		max-width: 980px;
+		max-width: 1000px;
 		margin: 0 auto;
 		padding: 3rem 1rem 4rem;
 	}
 
-	.terminal {
-		background: var(--term-bg);
-		border: 1px solid var(--term-border);
-		border-radius: 10px;
-		box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+	/* ---- plasma window frame ---- */
+	.window {
+		background: var(--win-bg);
+		border: 1px solid var(--win-border);
+		border-radius: 8px;
+		box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
 		overflow: hidden;
 	}
 
@@ -71,33 +84,115 @@ const links = resume.links;
 		align-items: center;
 		gap: 0.5rem;
 		background: var(--titlebar);
-		padding: 0.55rem 1rem;
-		border-bottom: 1px solid var(--term-border);
+		padding: 0 0.4rem 0 0.8rem;
+		height: 38px;
+		border-bottom: 1px solid var(--win-border);
+		user-select: none;
 	}
 
-	.dot {
-		width: 12px;
-		height: 12px;
-		border-radius: 50%;
+	.titlebar-icon {
+		display: grid;
+		place-items: center;
+		width: 20px;
+		height: 20px;
+		border-radius: 4px;
+		background: var(--row-active);
+		color: var(--accent);
+		font-size: 0.8rem;
+		flex: none;
 	}
-
-	.dot.r { background: #ff5f56; }
-	.dot.y { background: #ffbd2e; }
-	.dot.g { background: #27c93f; }
 
 	.titlebar-title {
 		flex: 1;
 		text-align: center;
-		color: var(--dim);
+		color: var(--title-text);
 		font-size: 0.85rem;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
+	.window-buttons {
+		display: flex;
+		gap: 2px;
+		flex: none;
+	}
+
+	.window-buttons button {
+		display: grid;
+		place-items: center;
+		width: 28px;
+		height: 28px;
+		border-radius: 6px;
+		border: 0;
+		background: transparent;
+		color: var(--title-text);
+		font: inherit;
+		font-size: 0.85rem;
+		line-height: 1;
+		cursor: pointer;
+		padding: 0;
+	}
+
+	.window-buttons button:hover,
+	.window-buttons button:focus-visible {
+		background: var(--btn-hover);
+		text-decoration: none;
+	}
+
+	/* ---- zellij tab strip ---- */
+	.tabstrip {
+		display: flex;
+		align-items: stretch;
+		gap: 2px;
+		background: var(--tabstrip-bg);
+		padding: 6px 8px 0;
+		overflow-x: auto;
+		white-space: nowrap;
+		scrollbar-width: none;
+		border-bottom: 1px solid var(--panel-border);
+	}
+
+	.tabstrip::-webkit-scrollbar {
+		display: none;
+	}
+
+	.tab {
+		border: 0;
+		border-radius: 6px 6px 0 0;
+		background: transparent;
+		color: var(--tab-dim);
+		font: inherit;
+		font-size: 0.85rem;
+		padding: 6px 14px 8px;
+		cursor: pointer;
+	}
+
+	.tab:hover {
+		color: var(--text);
+	}
+
+	.tab:focus-visible {
+		outline: 1px solid var(--tab-active-bg);
+		outline-offset: -1px;
+	}
+
+	.tab.active {
+		background: var(--tab-active-bg);
+		color: var(--tab-active-text);
+		font-weight: 700;
+	}
+
+	.tab .idx {
+		opacity: 0.6;
+		margin-right: 0.45em;
+	}
+
+	/* ---- terminal body ---- */
 	.term-body {
+		background: var(--term-bg);
 		padding: 1.5rem 1.75rem 1.25rem;
-	}
-
-	.prompt {
-		color: var(--accent);
+		min-height: 420px;
 	}
 
 	.dim {
@@ -107,12 +202,16 @@ const links = resume.links;
 	/* boot sequence */
 	.boot {
 		margin-bottom: 1.25rem;
-		white-space: pre-wrap;
 	}
 
 	.boot .cmd-line .prompt::after {
 		content: "$";
 		margin-right: 0.55em;
+	}
+
+	.prompt {
+		color: var(--accent);
+		font-weight: 700;
 	}
 
 	.cursor {
@@ -143,7 +242,7 @@ const links = resume.links;
 		to { opacity: 1; transform: none; }
 	}
 
-	/* menu */
+	/* home / ls */
 	.menu {
 		margin-top: 0.5rem;
 	}
@@ -162,6 +261,7 @@ const links = resume.links;
 		margin: 0.15rem 0;
 		cursor: pointer;
 		text-align: left;
+		position: relative;
 	}
 
 	.menu-item .idx {
@@ -184,10 +284,6 @@ const links = resume.links;
 		left: -0.9rem;
 		color: var(--accent);
 		opacity: 0;
-	}
-
-	.menu-item {
-		position: relative;
 	}
 
 	.menu-item:hover,
@@ -213,25 +309,6 @@ const links = resume.links;
 		margin-right: 0.55em;
 	}
 
-	.back {
-		background: none;
-		border: 1px solid var(--term-border);
-		border-radius: 6px;
-		color: var(--dim);
-		font: inherit;
-		font-size: 0.85rem;
-		padding: 0.25rem 0.75rem;
-		cursor: pointer;
-		margin-bottom: 1rem;
-	}
-
-	.back:hover,
-	.back:focus-visible {
-		color: var(--text);
-		border-color: var(--dim);
-		text-decoration: none;
-	}
-
 	.section-title {
 		font-size: 1.6rem;
 		font-weight: 700;
@@ -245,7 +322,7 @@ const links = resume.links;
 
 	/* experience */
 	.entry {
-		border: 1px solid var(--term-border);
+		border: 1px solid var(--panel-border);
 		border-radius: 8px;
 		padding: 1rem 1.25rem;
 		margin-bottom: 1rem;
@@ -309,7 +386,7 @@ const links = resume.links;
 
 	.tag {
 		background: var(--tag-bg);
-		border: 1px solid var(--term-border);
+		border: 1px solid var(--panel-border);
 		border-radius: 999px;
 		padding: 0.15rem 0.8rem;
 		font-size: 0.9rem;
@@ -317,7 +394,7 @@ const links = resume.links;
 
 	/* projects */
 	.project {
-		border: 1px solid var(--term-border);
+		border: 1px solid var(--panel-border);
 		border-radius: 8px;
 		padding: 1rem 1.25rem;
 		margin-bottom: 1rem;
@@ -325,10 +402,6 @@ const links = resume.links;
 
 	.project-name {
 		font-weight: 700;
-	}
-
-	.project-name a {
-		color: var(--text);
 	}
 
 	.project-desc {
@@ -366,7 +439,7 @@ const links = resume.links;
 		display: flex;
 		gap: 1rem;
 		padding: 0.4rem 0;
-		border-bottom: 1px dashed var(--term-border);
+		border-bottom: 1px dashed var(--panel-border);
 	}
 
 	.contact-list li:last-child {
@@ -378,21 +451,26 @@ const links = resume.links;
 		min-width: 9ch;
 	}
 
-	/* status bar */
-	.statusbar {
+	/* bottom prompt */
+	.bottombar {
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 		gap: 1rem;
-		border-top: 1px solid var(--term-border);
-		padding: 0.4rem 1rem;
-		font-size: 0.8rem;
-		color: var(--dim);
-		background: var(--titlebar);
+		background: var(--tabstrip-bg);
+		border-top: 1px solid var(--panel-border);
+		padding: 0.5rem 1.25rem;
+		font-size: 0.85rem;
 	}
 
-	.statusbar .hint kbd {
+	.bottombar .hint {
+		color: var(--dim);
+		font-size: 0.8rem;
+	}
+
+	.bottombar .hint kbd {
 		background: var(--tag-bg);
-		border: 1px solid var(--term-border);
+		border: 1px solid var(--panel-border);
 		border-radius: 4px;
 		padding: 0 0.35em;
 		font-family: inherit;
@@ -408,7 +486,7 @@ const links = resume.links;
 			padding: 1.1rem 1rem 1rem;
 		}
 
-		.statusbar .hint {
+		.bottombar .hint {
 			display: none;
 		}
 
@@ -443,19 +521,31 @@ const links = resume.links;
 	</head>
 	<body>
 		<div class="wrap">
-			<div class="terminal" role="application" aria-label="Terminal">
+			<div class="window" role="application" aria-label="Terminal window">
 				<div class="titlebar">
-					<span class="dot r"></span>
-					<span class="dot y"></span>
-					<span class="dot g"></span>
-					<span class="titlebar-title">mitchell@mwcaisse: ~</span>
+					<span class="titlebar-icon" aria-hidden="true">❯_</span>
+					<span class="titlebar-title">mitchell@mwcaisse: ~ — alacritty</span>
+					<div class="window-buttons" aria-hidden="true">
+						<button type="button" tabindex="-1">–</button>
+						<button type="button" tabindex="-1">□</button>
+						<button type="button" tabindex="-1">×</button>
+					</div>
 				</div>
+
+				<nav class="tabstrip" aria-label="Sections">
+					<button class="tab active" data-goto="home"><span class="idx">0</span>~</button>
+					<button class="tab" data-goto="about"><span class="idx">1</span>about.md</button>
+					<button class="tab" data-goto="experience"><span class="idx">2</span>experience.log</button>
+					<button class="tab" data-goto="skills"><span class="idx">3</span>skills.yaml</button>
+					<button class="tab" data-goto="projects"><span class="idx">4</span>projects/</button>
+					<button class="tab" data-goto="contact"><span class="idx">5</span>contact.sh</button>
+				</nav>
 
 				<div class="term-body">
 					<div class="boot" id="boot" aria-hidden="true"></div>
 
-					<!-- menu -->
-					<nav class="menu" data-view="menu" aria-label="Sections">
+					<!-- home -->
+					<nav class="menu" data-view="home" aria-label="Files">
 						<button class="menu-item" data-goto="about">
 							<span class="arrow">➜</span>
 							<span class="idx">1</span>
@@ -491,7 +581,6 @@ const links = resume.links;
 					<!-- about -->
 					<section data-view="about">
 						<div class="file-header"><span class="prompt">cat about.md</span></div>
-						<button class="back" data-back>← cd ~</button>
 						<h1 class="section-title">{resume.name}</h1>
 						<p class="section-sub">{resume.title} · {resume.tagline}</p>
 						<p class="about-p">{resume.about}</p>
@@ -507,7 +596,6 @@ const links = resume.links;
 					<!-- experience -->
 					<section data-view="experience">
 						<div class="file-header"><span class="prompt">cat experience.log</span></div>
-						<button class="back" data-back>← cd ~</button>
 						<h1 class="section-title">Experience</h1>
 						<p class="section-sub">{companies.length} positions, 2015 → present</p>
 						{
@@ -532,7 +620,6 @@ const links = resume.links;
 					<!-- skills -->
 					<section data-view="skills">
 						<div class="file-header"><span class="prompt">cat skills.yaml</span></div>
-						<button class="back" data-back>← cd ~</button>
 						<h1 class="section-title">Skills</h1>
 						<p class="section-sub">things i reach for</p>
 						{
@@ -550,7 +637,6 @@ const links = resume.links;
 					<!-- projects -->
 					<section data-view="projects">
 						<div class="file-header"><span class="prompt">ls -la projects/</span></div>
-						<button class="back" data-back>← cd ~</button>
 						<h1 class="section-title">Projects</h1>
 						<p class="section-sub">side projects & experiments</p>
 						{
@@ -574,7 +660,6 @@ const links = resume.links;
 					<!-- contact -->
 					<section data-view="contact">
 						<div class="file-header"><span class="prompt">./contact.sh --info</span></div>
-						<button class="back" data-back>← cd ~</button>
 						<h1 class="section-title">Contact</h1>
 						<p class="section-sub">the fastest way to reach me</p>
 						<ul class="contact-list">
@@ -587,19 +672,21 @@ const links = resume.links;
 					</section>
 				</div>
 
-				<div class="statusbar">
-					<span>mwcaisse.com</span>
-					<span class="hint">
-						<kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>1-5</kbd> open · <kbd>esc</kbd> back
+				<div class="bottombar">
+					<span>
+						<span class="prompt" id="cwd">mitchell@mwcaisse:~$</span>
+						<span class="cursor" aria-hidden="true"></span>
 					</span>
-					<span id="cwd">~</span>
+					<span class="hint">
+						<kbd>1-5</kbd> open file · <kbd>0</kbd>/<kbd>esc</kbd> home
+					</span>
 				</div>
 			</div>
 		</div>
 
 		<noscript>
 			<style>
-				.boot, .menu, .statusbar .hint, #cwd, .back, .file-header {
+				.boot, .menu, .tabstrip, .bottombar .hint, .back, .file-header {
 					display: none !important;
 				}
 
@@ -614,32 +701,39 @@ const links = resume.links;
 
 <script>
 	const views = Array.from(document.querySelectorAll("[data-view]"));
+	const tabs = Array.from(document.querySelectorAll(".tab"));
 	const menuItems = Array.from(document.querySelectorAll(".menu-item"));
 	const bootEl = document.getElementById("boot");
 	const cwdEl = document.getElementById("cwd");
-	const backButtons = Array.from(document.querySelectorAll("[data-back]"));
 	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 	const NAMES = {
-		menu: "~",
+		home: "~",
 		about: "~/about.md",
 		experience: "~/experience.log",
 		skills: "~/skills.yaml",
-		projects: "~/projects/",
+		projects: "~/projects",
 		contact: "~/contact.sh",
 	};
 
-	let current = "menu";
+	const KEY_TO_VIEW = {
+		"1": "about",
+		"2": "experience",
+		"3": "skills",
+		"4": "projects",
+		"5": "contact",
+	};
+
+	let current = "home";
 	let cursor = 0;
 
 	function show(name) {
 		current = name;
 		views.forEach((v) => v.classList.toggle("active", v.dataset.view === name));
-		cwdEl.textContent = NAMES[name] ?? "~";
-		if (name === "menu") {
+		tabs.forEach((t) => t.classList.toggle("active", t.dataset.goto === name));
+		cwdEl.textContent = `mitchell@mwcaisse:${NAMES[name] ?? "~"}$`;
+		if (name === "home") {
 			setCursor(0);
-		} else {
-			menuItems.forEach((m) => m.classList.remove("cursored"));
 		}
 		window.scrollTo({ top: 0 });
 	}
@@ -653,21 +747,31 @@ const links = resume.links;
 		show(name);
 	}
 
-	// menu clicks
+	// tab strip
+	tabs.forEach((tab) => tab.addEventListener("click", () => open(tab.dataset.goto)));
+
+	// home menu clicks
 	menuItems.forEach((item) => {
 		item.addEventListener("click", () => open(item.dataset.goto));
 		item.addEventListener("mouseenter", () => {
-			if (current === "menu") setCursor(menuItems.indexOf(item));
+			if (current === "home") setCursor(menuItems.indexOf(item));
 		});
 	});
 
-	// back buttons
-	backButtons.forEach((b) => b.addEventListener("click", () => show("menu")));
-
-	// keyboard
+	// keyboard: works from any view
 	document.addEventListener("keydown", (e) => {
 		if (!bootDone) finishBoot();
-		if (current === "menu") {
+		if (KEY_TO_VIEW[e.key]) {
+			e.preventDefault();
+			open(KEY_TO_VIEW[e.key]);
+			return;
+		}
+		if (e.key === "Escape" || e.key === "Home" || e.key === "0") {
+			e.preventDefault();
+			show("home");
+			return;
+		}
+		if (current === "home") {
 			if (e.key === "ArrowDown") {
 				e.preventDefault();
 				setCursor(cursor + 1);
@@ -677,13 +781,7 @@ const links = resume.links;
 			} else if (e.key === "Enter" && document.activeElement?.classList.contains("menu-item")) {
 				e.preventDefault();
 				open(document.activeElement.dataset.goto);
-			} else if (/^[1-5]$/.test(e.key)) {
-				e.preventDefault();
-				open(menuItems[Number(e.key) - 1].dataset.goto);
 			}
-		} else if (e.key === "Escape") {
-			e.preventDefault();
-			show("menu");
 		}
 	});
 
@@ -708,14 +806,14 @@ const links = resume.links;
 					? `<div class="cmd-line"><span class="prompt"></span>${l.text}</div>`
 					: `<div class="out">${l.text}</div>`
 			)
-			.join("") + `<div class="cmd-line"><span class="prompt"></span><span class="cursor"></span></div>`;
+			.join("");
 	}
 
 	function typeBoot() {
 		bootEl.innerHTML = "";
-		const cursor = document.createElement("span");
-		cursor.className = "cursor";
-		bootEl.appendChild(cursor);
+		const cursorEl = document.createElement("span");
+		cursorEl.className = "cursor";
+		bootEl.appendChild(cursorEl);
 
 		let li = 0;
 		let ci = 0;
@@ -738,7 +836,7 @@ const links = resume.links;
 				const t = document.createElement("span");
 				t.className = "typed";
 				el.appendChild(t);
-				bootEl.insertBefore(el, cursor);
+				bootEl.insertBefore(el, cursorEl);
 			}
 			ci += 1;
 			el.querySelector(".typed").textContent = line.text.slice(0, ci);
@@ -764,5 +862,5 @@ const links = resume.links;
 		if (!bootDone) finishBoot();
 	});
 
-	show("menu");
+	show("home");
 </script>
